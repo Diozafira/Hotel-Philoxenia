@@ -108,7 +108,7 @@
             registerUsername.Name = "registerUsername";
             registerUsername.Size = new Size(335, 27);
             registerUsername.TabIndex = 13;
-            registerUsername.TextChanged += registerUsername_TextChanged;
+            registerUsername.TextChanged += label5_Click;
             // 
             // textBox2
             // 
@@ -172,6 +172,7 @@
             registerLogin.TabIndex = 3;
             registerLogin.Text = "Login";
             registerLogin.UseVisualStyleBackColor = false;
+            registerLogin.Click += registerLogin_Click;
             // 
             // label2
             // 
@@ -223,6 +224,7 @@
             button1.TabIndex = 25;
             button1.Text = "X";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += Button1_Click;
             // 
             // RegistrationForm
             // 

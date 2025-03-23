@@ -1,2 +1,19 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using System.Windows.Forms;
+using Hotel_Philoxenia.Forms; 
+
+namespace Hotel_Philoxenia
+{
+    internal static class Program
+    {
+       
+        [STAThread]
+        static void Main()
+        {
+            ApplicationConfiguration.Initialize();
+
+            // Start with LoginForm
+            Application.Run(new LoginForm());
+        }
+    }
+}

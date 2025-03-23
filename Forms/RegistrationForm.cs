@@ -27,12 +27,22 @@ namespace Hotel_Philoxenia.Forms
 
         private void registerPassword_TextChanged(object sender, EventArgs e) { }
 
-        private void registerUsername_TextChanged(object sender, EventArgs e) { }
-
         private void registerHeaderTextChanged(object sender, EventArgs e) { }
-        
+
         private void label5_Click(object sender, EventArgs e) { }
 
-     
+        private void registerLogin_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Hide Register form
+            LoginForm logForm = new LoginForm();
+            logForm.FormClosed += (s, args) => this.Show(); // Re-show login after register closes
+            logForm.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
     }
 }

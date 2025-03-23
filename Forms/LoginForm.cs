@@ -17,7 +17,13 @@ namespace Hotel_Philoxenia.Forms
             InitializeComponent();
         }
 
-        private void loginRegistration_Click(object sender, EventArgs e) { }
+        private void loginRegistration_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Hide login form
+            RegistrationForm regForm = new RegistrationForm();
+            regForm.FormClosed += (s, args) => this.Show(); // Re-show login after register closes
+            regForm.Show();
+        }
         private void label2_Click(object sender, EventArgs e) { }
         private void label1_Click(object sender, EventArgs e) { }
         private void pictureBox1_Click(object sender, EventArgs e) { }
@@ -32,5 +38,10 @@ namespace Hotel_Philoxenia.Forms
         private void loginLogin_Click(object sender, EventArgs e) { }
         private void label5_Click(object sender, EventArgs e) { }
         private void label6_Click(object sender, EventArgs e) { }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

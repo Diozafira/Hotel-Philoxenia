@@ -212,6 +212,7 @@ namespace Hotel_Philoxenia.Forms
             button1.TabIndex = 26;
             button1.Text = "X";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // LoginForm
             // 
