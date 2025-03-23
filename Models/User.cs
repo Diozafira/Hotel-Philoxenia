@@ -8,10 +8,13 @@ namespace Hotel_Philoxenia.Models
 {
     public class User
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; } // In production, use hashed passwords!
-        public string Role { get; set; } // "Admin" or "User"
+        public int Id { get; set; } = 0;
+        public string Username { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string Role { get; set; } = "";
+        public string Status { get; set; } = "";
+        public string DateCreated { get; set; } = "";
+
     }
 
 }
