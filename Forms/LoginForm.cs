@@ -19,9 +19,9 @@ namespace Hotel_Philoxenia.Forms
 
         private void loginRegistration_Click(object sender, EventArgs e)
         {
-            this.Hide(); // Hide login form
+            this.Hide(); 
             RegistrationForm regForm = new RegistrationForm();
-            regForm.FormClosed += (s, args) => this.Show(); // Re-show login after register closes
+            regForm.FormClosed += (s, args) => this.Show(); 
             regForm.Show();
         }
         private void label2_Click(object sender, EventArgs e) { }
@@ -35,7 +35,32 @@ namespace Hotel_Philoxenia.Forms
         {
             loginPassword.UseSystemPasswordChar = !loginShowPassBtn.Checked;
         }
-        private void loginLogin_Click(object sender, EventArgs e) { }
+        private void loginLogin_Click(object sender, EventArgs e) {
+            if (loginUsername.Text == "" || loginPassword.Text == "")
+            { MessageBox.Show("Please fill in all fields", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            else
+            {
+                using (var db = new HotelContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Username == loginUsername.Text.Trim());
+                    if (user == null)
+                    {
+                        MessageBox.Show("User not found", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (PasswordHelper.VerifyPassword(loginPassword.Text.Trim(), user.Password))
+                        {
+                            MessageBox.Show("Login successful");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Incorrect password", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            }
         private void label5_Click(object sender, EventArgs e) { }
         private void label6_Click(object sender, EventArgs e) { }
 

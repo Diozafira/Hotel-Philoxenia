@@ -85,6 +85,8 @@
             // registerShowPassBtn
             // 
             registerShowPassBtn.AutoSize = true;
+            registerShowPassBtn.Checked = true;
+            registerShowPassBtn.CheckState = CheckState.Checked;
             registerShowPassBtn.Font = new Font("Cambria", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 161);
             registerShowPassBtn.Location = new Point(573, 338);
             registerShowPassBtn.Name = "registerShowPassBtn";
