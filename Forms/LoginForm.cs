@@ -52,6 +52,9 @@ namespace Hotel_Philoxenia.Forms
                         if (PasswordHelper.VerifyPassword(loginPassword.Text.Trim(), user.Password))
                         {
                             MessageBox.Show("Login successful");
+                            AdminMainForm adminMainForm = new AdminMainForm();
+                            adminMainForm.Show();
+                            this.Hide();
                         }
                         else
                         {
