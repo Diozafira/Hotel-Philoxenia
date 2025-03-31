@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMainForm));
             panel1 = new Panel();
+            pictureBox3 = new PictureBox();
             AdminMainFormToolsBtn = new Button();
             AdminMainFormBookingsBtn = new Button();
             AdminMainFormRoomsBtn = new Button();
@@ -38,21 +39,27 @@
             AdminMainExitBtn = new Button();
             label1 = new Label();
             panel3 = new Panel();
+            button1 = new Button();
+            textBox1 = new TextBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            textBox1 = new TextBox();
-            button1 = new Button();
+            menuStrip1 = new MenuStrip();
+            addToolStripMenuItem = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
+            updateToolStripMenuItem = new ToolStripMenuItem();
+            viewToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 192, 192);
+            panel1.Controls.Add(menuStrip1);
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(AdminMainFormToolsBtn);
             panel1.Controls.Add(AdminMainFormBookingsBtn);
@@ -63,9 +70,20 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Font = new Font("Cambria", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1182, 753);
+            panel1.Size = new Size(1034, 565);
             panel1.TabIndex = 0;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(381, 406);
+            pictureBox3.Margin = new Padding(3, 2, 3, 2);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(419, 150);
+            pictureBox3.TabIndex = 6;
+            pictureBox3.TabStop = false;
             // 
             // AdminMainFormToolsBtn
             // 
@@ -73,9 +91,10 @@
             AdminMainFormToolsBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
             AdminMainFormToolsBtn.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             AdminMainFormToolsBtn.ForeColor = Color.FromArgb(0, 192, 192);
-            AdminMainFormToolsBtn.Location = new Point(698, 291);
+            AdminMainFormToolsBtn.Location = new Point(611, 218);
+            AdminMainFormToolsBtn.Margin = new Padding(3, 2, 3, 2);
             AdminMainFormToolsBtn.Name = "AdminMainFormToolsBtn";
-            AdminMainFormToolsBtn.Size = new Size(260, 120);
+            AdminMainFormToolsBtn.Size = new Size(228, 90);
             AdminMainFormToolsBtn.TabIndex = 5;
             AdminMainFormToolsBtn.Text = "Admin Tools";
             AdminMainFormToolsBtn.UseVisualStyleBackColor = true;
@@ -86,9 +105,10 @@
             AdminMainFormBookingsBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
             AdminMainFormBookingsBtn.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             AdminMainFormBookingsBtn.ForeColor = Color.FromArgb(0, 192, 192);
-            AdminMainFormBookingsBtn.Location = new Point(353, 291);
+            AdminMainFormBookingsBtn.Location = new Point(309, 218);
+            AdminMainFormBookingsBtn.Margin = new Padding(3, 2, 3, 2);
             AdminMainFormBookingsBtn.Name = "AdminMainFormBookingsBtn";
-            AdminMainFormBookingsBtn.Size = new Size(260, 120);
+            AdminMainFormBookingsBtn.Size = new Size(228, 90);
             AdminMainFormBookingsBtn.TabIndex = 4;
             AdminMainFormBookingsBtn.Text = "Bookings";
             AdminMainFormBookingsBtn.UseVisualStyleBackColor = true;
@@ -99,9 +119,10 @@
             AdminMainFormRoomsBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
             AdminMainFormRoomsBtn.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             AdminMainFormRoomsBtn.ForeColor = Color.FromArgb(0, 192, 192);
-            AdminMainFormRoomsBtn.Location = new Point(698, 102);
+            AdminMainFormRoomsBtn.Location = new Point(611, 76);
+            AdminMainFormRoomsBtn.Margin = new Padding(3, 2, 3, 2);
             AdminMainFormRoomsBtn.Name = "AdminMainFormRoomsBtn";
-            AdminMainFormRoomsBtn.Size = new Size(260, 120);
+            AdminMainFormRoomsBtn.Size = new Size(228, 90);
             AdminMainFormRoomsBtn.TabIndex = 3;
             AdminMainFormRoomsBtn.Text = "Rooms";
             AdminMainFormRoomsBtn.UseVisualStyleBackColor = true;
@@ -112,39 +133,43 @@
             AdminMainFormCustBtn.FlatAppearance.MouseOverBackColor = Color.Silver;
             AdminMainFormCustBtn.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             AdminMainFormCustBtn.ForeColor = Color.FromArgb(0, 192, 192);
-            AdminMainFormCustBtn.Location = new Point(353, 102);
+            AdminMainFormCustBtn.Location = new Point(309, 76);
+            AdminMainFormCustBtn.Margin = new Padding(3, 2, 3, 2);
             AdminMainFormCustBtn.Name = "AdminMainFormCustBtn";
-            AdminMainFormCustBtn.Size = new Size(260, 120);
+            AdminMainFormCustBtn.Size = new Size(228, 90);
             AdminMainFormCustBtn.TabIndex = 2;
             AdminMainFormCustBtn.Text = "Customers";
             AdminMainFormCustBtn.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
-            panel2.Location = new Point(0, 48);
+            panel2.Location = new Point(0, 36);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(250, 705);
+            panel2.Size = new Size(219, 529);
             panel2.TabIndex = 1;
             // 
             // AdminMainExitBtn
             // 
             AdminMainExitBtn.BackColor = Color.FromArgb(0, 192, 192);
             AdminMainExitBtn.ForeColor = Color.White;
-            AdminMainExitBtn.Location = new Point(1133, 12);
+            AdminMainExitBtn.Location = new Point(991, 9);
+            AdminMainExitBtn.Margin = new Padding(3, 2, 3, 2);
             AdminMainExitBtn.Name = "AdminMainExitBtn";
-            AdminMainExitBtn.Size = new Size(37, 33);
+            AdminMainExitBtn.Size = new Size(32, 25);
             AdminMainExitBtn.TabIndex = 0;
             AdminMainExitBtn.Text = "X";
             AdminMainExitBtn.UseVisualStyleBackColor = false;
+            AdminMainExitBtn.Click += AdminMainExitBtn_Click_1;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label1.ForeColor = Color.OrangeRed;
-            label1.Location = new Point(18, 84);
+            label1.Location = new Point(16, 63);
             label1.Name = "label1";
-            label1.Size = new Size(229, 33);
+            label1.Size = new Size(182, 26);
             label1.TabIndex = 1;
             label1.Text = "Hotel Philoxenia";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -161,39 +186,25 @@
             panel3.Font = new Font("Cambria", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             panel3.ForeColor = Color.Silver;
             panel3.Location = new Point(0, 0);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(262, 753);
+            panel3.Size = new Size(229, 565);
             panel3.TabIndex = 1;
             // 
-            // pictureBox2
+            // button1
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(3, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(256, 62);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(0, 133);
-            pictureBox1.Margin = new Padding(0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(262, 257);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(435, 541);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(479, 200);
-            pictureBox3.TabIndex = 6;
-            pictureBox3.TabStop = false;
+            button1.BackColor = Color.Silver;
+            button1.ForeColor = Color.Black;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(63, 413);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 52);
+            button1.TabIndex = 7;
+            button1.Text = "Log Out";
+            button1.TextImageRelation = TextImageRelation.TextAboveImage;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // textBox1
             // 
@@ -201,45 +212,99 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe Script", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 161);
             textBox1.ForeColor = Color.OrangeRed;
-            textBox1.Location = new Point(3, 658);
+            textBox1.Location = new Point(3, 494);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(247, 83);
+            textBox1.Size = new Size(216, 62);
             textBox1.TabIndex = 2;
             textBox1.Text = " Rue Philoxenia, Athens\r\n11257\r\nemail: philoxenia@yahoo.gr\r\ntel.: 210-2233456\r\n";
             textBox1.TextAlign = HorizontalAlignment.Center;
             // 
-            // button1
+            // pictureBox2
             // 
-            button1.BackColor = Color.Silver;
-            button1.ForeColor = Color.Black;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(72, 551);
-            button1.Name = "button1";
-            button1.Size = new Size(114, 69);
-            button1.TabIndex = 7;
-            button1.Text = "Log Out";
-            button1.TextImageRelation = TextImageRelation.TextAboveImage;
-            button1.UseVisualStyleBackColor = false;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(3, 2);
+            pictureBox2.Margin = new Padding(3, 2, 3, 2);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(224, 46);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 100);
+            pictureBox1.Margin = new Padding(0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(229, 193);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.Dock = DockStyle.None;
+            menuStrip1.Font = new Font("Cambria", 12F, FontStyle.Bold);
+            menuStrip1.GripStyle = ToolStripGripStyle.Visible;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, updateToolStripMenuItem, viewToolStripMenuItem });
+            menuStrip1.Location = new Point(444, 346);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(262, 27);
+            menuStrip1.TabIndex = 16;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // addToolStripMenuItem
+            // 
+            addToolStripMenuItem.ForeColor = Color.OrangeRed;
+            addToolStripMenuItem.Name = "addToolStripMenuItem";
+            addToolStripMenuItem.Size = new Size(51, 23);
+            addToolStripMenuItem.Text = "Add";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.ForeColor = Color.OrangeRed;
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(67, 23);
+            deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // updateToolStripMenuItem
+            // 
+            updateToolStripMenuItem.ForeColor = Color.OrangeRed;
+            updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            updateToolStripMenuItem.Size = new Size(75, 23);
+            updateToolStripMenuItem.Text = "Update";
+            // 
+            // viewToolStripMenuItem
+            // 
+            viewToolStripMenuItem.ForeColor = Color.OrangeRed;
+            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            viewToolStripMenuItem.Size = new Size(57, 23);
+            viewToolStripMenuItem.Text = "View";
             // 
             // AdminMainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SeaShell;
-            ClientSize = new Size(1182, 753);
+            ClientSize = new Size(1034, 565);
             Controls.Add(panel3);
             Controls.Add(panel1);
             ForeColor = Color.OrangeRed;
             FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AdminMainForm";
             Text = "Form1";
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -259,5 +324,10 @@
         private PictureBox pictureBox3;
         private TextBox textBox1;
         private Button button1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem addToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private ToolStripMenuItem updateToolStripMenuItem;
+        private ToolStripMenuItem viewToolStripMenuItem;
     }
 }

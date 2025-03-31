@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Hotel_Philoxenia.Forms
 {
-    public partial class AdminMainForm: Form
+    public partial class AdminMainForm : Form
     {
         public AdminMainForm()
         {
@@ -32,7 +32,9 @@ namespace Hotel_Philoxenia.Forms
         private void AdminMainFormCustBtn_Click(object sender, EventArgs e)
         {
             // Open the Customers form or show customers view
-            MessageBox.Show("Customers button clicked");
+            CustomerClass customerClass = new CustomerClass();
+            customerClass.Show();
+            this.Hide();
         }
 
         private void AdminMainFormRoomsBtn_Click(object sender, EventArgs e)
@@ -51,6 +53,16 @@ namespace Hotel_Philoxenia.Forms
         {
             // Open Admin Tools form or view
             MessageBox.Show("Admin Tools button clicked");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void AdminMainExitBtn_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
