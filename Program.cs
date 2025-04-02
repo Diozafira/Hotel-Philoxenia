@@ -11,8 +11,6 @@ namespace Hotel_Philoxenia
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-
-            // Start with LoginForm
             Application.Run(new LoginForm());
         }
     }

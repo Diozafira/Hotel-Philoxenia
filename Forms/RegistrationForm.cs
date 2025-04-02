@@ -64,7 +64,7 @@ namespace Hotel_Philoxenia.Forms
         {
             this.Hide(); // Hide Register form
             LoginForm logForm = new LoginForm();
-            logForm.FormClosed += (s, args) => this.Show(); // Re-show login after register closes
+            logForm.FormClosed += (s, args) => this.Show(); 
             logForm.Show();
         }
 

@@ -43,23 +43,16 @@
             textBox1 = new TextBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            menuStrip1 = new MenuStrip();
-            addToolStripMenuItem = new ToolStripMenuItem();
-            deleteToolStripMenuItem = new ToolStripMenuItem();
-            updateToolStripMenuItem = new ToolStripMenuItem();
-            viewToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(0, 192, 192);
-            panel1.Controls.Add(menuStrip1);
             panel1.Controls.Add(pictureBox3);
             panel1.Controls.Add(AdminMainFormToolsBtn);
             panel1.Controls.Add(AdminMainFormBookingsBtn);
@@ -243,46 +236,6 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // menuStrip1
-            // 
-            menuStrip1.Dock = DockStyle.None;
-            menuStrip1.Font = new Font("Cambria", 12F, FontStyle.Bold);
-            menuStrip1.GripStyle = ToolStripGripStyle.Visible;
-            menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, updateToolStripMenuItem, viewToolStripMenuItem });
-            menuStrip1.Location = new Point(444, 346);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(262, 27);
-            menuStrip1.TabIndex = 16;
-            menuStrip1.Text = "menuStrip1";
-            // 
-            // addToolStripMenuItem
-            // 
-            addToolStripMenuItem.ForeColor = Color.OrangeRed;
-            addToolStripMenuItem.Name = "addToolStripMenuItem";
-            addToolStripMenuItem.Size = new Size(51, 23);
-            addToolStripMenuItem.Text = "Add";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            deleteToolStripMenuItem.ForeColor = Color.OrangeRed;
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(67, 23);
-            deleteToolStripMenuItem.Text = "Delete";
-            // 
-            // updateToolStripMenuItem
-            // 
-            updateToolStripMenuItem.ForeColor = Color.OrangeRed;
-            updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            updateToolStripMenuItem.Size = new Size(75, 23);
-            updateToolStripMenuItem.Text = "Update";
-            // 
-            // viewToolStripMenuItem
-            // 
-            viewToolStripMenuItem.ForeColor = Color.OrangeRed;
-            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            viewToolStripMenuItem.Size = new Size(57, 23);
-            viewToolStripMenuItem.Text = "View";
-            // 
             // AdminMainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -297,14 +250,11 @@
             Name = "AdminMainForm";
             Text = "Form1";
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -324,10 +274,5 @@
         private PictureBox pictureBox3;
         private TextBox textBox1;
         private Button button1;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem addToolStripMenuItem;
-        private ToolStripMenuItem deleteToolStripMenuItem;
-        private ToolStripMenuItem updateToolStripMenuItem;
-        private ToolStripMenuItem viewToolStripMenuItem;
     }
 }

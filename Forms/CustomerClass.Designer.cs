@@ -208,9 +208,9 @@
             // 
             // toolTip1
             // 
-            toolTip1.ForeColor = Color.FromArgb(255, 128, 0);
-            toolTip1.ToolTipTitle = "Customers' Options";
-            toolTip1.Popup += toolTip1_Popup;
+            //toolTip1.ForeColor = Color.FromArgb(255, 128, 0);
+            //toolTip1.ToolTipTitle = "Customers' Options";
+            //toolTip1.Popup += toolTip1_Popup;
             // 
             // menuStrip1
             // 

@@ -16,7 +16,6 @@ namespace Hotel_Philoxenia.Forms
             _context = new HotelContext();
             LoadCustomers();
 
-            // Hook DataGridView row selection
             dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
         }
 
@@ -25,10 +24,7 @@ namespace Hotel_Philoxenia.Forms
             Application.Exit();
         }
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
-        {
-            // Optional
-        }
+        
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
@@ -112,7 +108,7 @@ namespace Hotel_Philoxenia.Forms
                 var customer = _context.Customers.Find(id);
                 if (customer != null)
                 {
-                    var confirm = MessageBox.Show("Delete this customer?", "Confirm", MessageBoxButtons.YesNo);
+                    var confirm = MessageBox.Show("Are you sure for this deletion?", "Confirm", MessageBoxButtons.YesNo);
                     if (confirm == DialogResult.Yes)
                     {
                         _context.Customers.Remove(customer);
