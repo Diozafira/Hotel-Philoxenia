@@ -17,6 +17,8 @@ namespace Hotel_Philoxenia.Forms
             LoadCustomers();
 
             dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+            this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,7 +26,13 @@ namespace Hotel_Philoxenia.Forms
             Application.Exit();
         }
 
-        
+        private void ReturnToAdminForm_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AdminMainForm adminMainForm = new AdminMainForm();
+            adminMainForm.Show();
+        }
+
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {

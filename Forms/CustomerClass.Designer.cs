@@ -42,8 +42,6 @@
             lastNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             afmDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            telephoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            vScrollBar1 = new VScrollBar();
             toolTip1 = new ToolTip(components);
             menuStrip1 = new MenuStrip();
             addToolStripMenuItem = new ToolStripMenuItem();
@@ -62,11 +60,13 @@
             textBox5 = new TextBox();
             textBox6 = new TextBox();
             textBox7 = new TextBox();
+            return_image = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)return_image).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -141,7 +141,7 @@
             // 
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, surNameDataGridViewTextBoxColumn, lastNameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, afmDataGridViewTextBoxColumn, telephoneDataGridViewTextBoxColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, surNameDataGridViewTextBoxColumn, lastNameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, afmDataGridViewTextBoxColumn });
             dataGridView1.DataSource = customerBindingSource;
             dataGridView1.Location = new Point(256, 297);
             dataGridView1.Margin = new Padding(3, 2, 3, 2);
@@ -149,7 +149,6 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(703, 224);
             dataGridView1.TabIndex = 13;
-            
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -191,34 +190,13 @@
             afmDataGridViewTextBoxColumn.Name = "afmDataGridViewTextBoxColumn";
             afmDataGridViewTextBoxColumn.Width = 125;
             // 
-            // telephoneDataGridViewTextBoxColumn
-            // 
-            telephoneDataGridViewTextBoxColumn.DataPropertyName = "telephone";
-            telephoneDataGridViewTextBoxColumn.HeaderText = "telephone";
-            telephoneDataGridViewTextBoxColumn.MinimumWidth = 6;
-            telephoneDataGridViewTextBoxColumn.Name = "telephoneDataGridViewTextBoxColumn";
-            telephoneDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // vScrollBar1
-            // 
-            vScrollBar1.Location = new Point(962, 296);
-            vScrollBar1.Name = "vScrollBar1";
-            vScrollBar1.Size = new Size(26, 224);
-            vScrollBar1.TabIndex = 14;
-            // 
-            // toolTip1
-            // 
-            //toolTip1.ForeColor = Color.FromArgb(255, 128, 0);
-            //toolTip1.ToolTipTitle = "Customers' Options";
-            //toolTip1.Popup += toolTip1_Popup;
-            // 
             // menuStrip1
             // 
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Font = new Font("Cambria", 12F, FontStyle.Bold);
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, updateToolStripMenuItem, viewToolStripMenuItem });
-            menuStrip1.Location = new Point(758, 9);
+            menuStrip1.Location = new Point(761, 2);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(262, 27);
             menuStrip1.TabIndex = 15;
@@ -261,7 +239,6 @@
             label2.Size = new Size(17, 15);
             label2.TabIndex = 16;
             label2.Text = "Id";
-            
             // 
             // label3
             // 
@@ -271,7 +248,6 @@
             label3.Size = new Size(59, 15);
             label3.TabIndex = 17;
             label3.Text = "Sur Name";
-           
             // 
             // label4
             // 
@@ -281,7 +257,6 @@
             label4.Size = new Size(63, 15);
             label4.TabIndex = 18;
             label4.Text = "Last Name";
-            
             // 
             // label5
             // 
@@ -352,12 +327,23 @@
             textBox7.Size = new Size(241, 23);
             textBox7.TabIndex = 27;
             // 
+            // return_image
+            // 
+            return_image.Image = (Image)resources.GetObject("return_image.Image");
+            return_image.Location = new Point(742, 12);
+            return_image.Name = "return_image";
+            return_image.Size = new Size(16, 16);
+            return_image.SizeMode = PictureBoxSizeMode.AutoSize;
+            return_image.TabIndex = 28;
+            return_image.TabStop = false;
+            // 
             // CustomerClass
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1019, 530);
+            Controls.Add(return_image);
             Controls.Add(textBox7);
             Controls.Add(textBox6);
             Controls.Add(textBox5);
@@ -370,7 +356,6 @@
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(vScrollBar1);
             Controls.Add(dataGridView1);
             Controls.Add(button1);
             Controls.Add(textBox1);
@@ -389,6 +374,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)return_image).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -409,7 +395,6 @@
         private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn afmDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn telephoneDataGridViewTextBoxColumn;
-        private VScrollBar vScrollBar1;
         private ToolTip toolTip1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem addToolStripMenuItem;
@@ -428,5 +413,6 @@
         private TextBox textBox5;
         private TextBox textBox6;
         private TextBox textBox7;
+        private PictureBox return_image;
     }
 }
