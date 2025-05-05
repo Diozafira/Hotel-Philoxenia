@@ -67,8 +67,6 @@ namespace Hotel_Philoxenia.Forms
                 textBox3_roomNumber.Text = selected.SurName;
                 textBox4_roomType.Text = selected.LastName;
                 textBox5_priceperNight.Text = selected.Email;
-                textBox6.Text = selected.Afm;
-                textBox7.Text = selected.Telephone;
             }
         }
 
@@ -79,7 +77,6 @@ namespace Hotel_Philoxenia.Forms
                 SurName = textBox3_roomNumber.Text,
                 LastName = textBox4_roomType.Text,
                 Email = textBox5_priceperNight.Text,
-                Afm = textBox6.Text,
                 Telephone = textBox7.Text
             };
 
@@ -99,8 +96,7 @@ namespace Hotel_Philoxenia.Forms
                     customer.SurName = textBox3_roomNumber.Text;
                     customer.LastName = textBox4_roomType.Text;
                     customer.Email = textBox5_priceperNight.Text;
-                    customer.Afm = textBox6.Text;
-                    customer.Telephone = textBox7.Text;
+                    
 
                     _context.SaveChanges();
                     LoadCustomers();
@@ -134,8 +130,6 @@ namespace Hotel_Philoxenia.Forms
             textBox3_roomNumber.Text = "";
             textBox4_roomType.Text = "";
             textBox5_priceperNight.Text = "";
-            textBox6.Text = "";
-            textBox7.Text = "";
         }
     }
 }

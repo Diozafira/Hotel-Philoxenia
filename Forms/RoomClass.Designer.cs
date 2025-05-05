@@ -38,6 +38,9 @@
             customerBindingSource = new BindingSource(components);
             dataGridView1 = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            IsAvailable = new DataGridViewCheckBoxColumn();
+            HotelId = new DataGridViewTextBoxColumn();
+            roomBindingSource = new BindingSource(components);
             toolTip1 = new ToolTip(components);
             menuStrip1 = new MenuStrip();
             addToolStripMenuItem = new ToolStripMenuItem();
@@ -56,17 +59,14 @@
             textBox5_priceperNight = new TextBox();
             textBox7 = new TextBox();
             return_image = new PictureBox();
-            roomBindingSource = new BindingSource(components);
             IsAvaillabel = new CheckBox();
-            IsAvailable = new DataGridViewCheckBoxColumn();
-            HotelId = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)return_image).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             SuspendLayout();
             // 
             // button1
@@ -149,7 +149,6 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(678, 224);
             dataGridView1.TabIndex = 13;
-            dataGridView1.CellContentClick += this.dataGridView1_CellContentClick;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -159,15 +158,31 @@
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.Width = 125;
             // 
+            // IsAvailable
+            // 
+            IsAvailable.DataPropertyName = "IsAvailable";
+            IsAvailable.HeaderText = "IsAvailable";
+            IsAvailable.Name = "IsAvailable";
+            // 
+            // HotelId
+            // 
+            HotelId.DataPropertyName = "HotelId";
+            HotelId.HeaderText = "HotelId";
+            HotelId.Name = "HotelId";
+            // 
+            // roomBindingSource
+            // 
+            roomBindingSource.DataSource = typeof(Models.Room);
+            // 
             // menuStrip1
             // 
             menuStrip1.Dock = DockStyle.None;
             menuStrip1.Font = new Font("Cambria", 12F, FontStyle.Bold);
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, updateToolStripMenuItem, viewToolStripMenuItem });
-            menuStrip1.Location = new Point(761, 2);
+            menuStrip1.Location = new Point(662, 21);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(262, 27);
+            menuStrip1.Size = new Size(382, 27);
             menuStrip1.TabIndex = 15;
             menuStrip1.Text = "menuStrip1";
             menuStrip1.ItemClicked += menuStrip1_ItemClicked;
@@ -209,7 +224,6 @@
             roomid.Size = new Size(52, 15);
             roomid.TabIndex = 16;
             roomid.Text = "Room Id";
-            roomid.Click += this.label2_Click;
             // 
             // RoomNumber
             // 
@@ -240,7 +254,6 @@
             PricePerNight.Size = new Size(86, 15);
             PricePerNight.TabIndex = 19;
             PricePerNight.Text = "Price per Night";
-            PricePerNight.Click += this.label5_Click;
             // 
             // Availlability
             // 
@@ -251,7 +264,6 @@
             Availlability.Size = new Size(68, 15);
             Availlability.TabIndex = 20;
             Availlability.Text = "Availlability";
-            Availlability.Click += this.label6_Click;
             // 
             // label7
             // 
@@ -261,7 +273,6 @@
             label7.Size = new Size(49, 15);
             label7.TabIndex = 21;
             label7.Text = "Hotel Id";
-            label7.Click += this.label7_Click;
             // 
             // textBox2_roomid
             // 
@@ -306,16 +317,12 @@
             // return_image
             // 
             return_image.Image = (Image)resources.GetObject("return_image.Image");
-            return_image.Location = new Point(742, 12);
+            return_image.Location = new Point(901, 2);
             return_image.Name = "return_image";
             return_image.Size = new Size(16, 16);
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;
             return_image.TabIndex = 28;
             return_image.TabStop = false;
-            // 
-            // roomBindingSource
-            // 
-            roomBindingSource.DataSource = typeof(Models.Room);
             // 
             // IsAvaillabel
             // 
@@ -329,19 +336,6 @@
             IsAvaillabel.TabIndex = 29;
             IsAvaillabel.Text = "checkBox1";
             IsAvaillabel.UseVisualStyleBackColor = true;
-            IsAvaillabel.CheckedChanged += this.checkBox1_CheckedChanged;
-            // 
-            // IsAvailable
-            // 
-            IsAvailable.DataPropertyName = "IsAvailable";
-            IsAvailable.HeaderText = "IsAvailable";
-            IsAvailable.Name = "IsAvailable";
-            // 
-            // HotelId
-            // 
-            HotelId.DataPropertyName = "HotelId";
-            HotelId.HeaderText = "HotelId";
-            HotelId.Name = "HotelId";
             // 
             // RoomClass
             // 
@@ -378,10 +372,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customerBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)return_image).EndInit();
-            ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

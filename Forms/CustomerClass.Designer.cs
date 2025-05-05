@@ -196,7 +196,7 @@
             menuStrip1.Font = new Font("Cambria", 12F, FontStyle.Bold);
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.Items.AddRange(new ToolStripItem[] { addToolStripMenuItem, deleteToolStripMenuItem, updateToolStripMenuItem, viewToolStripMenuItem });
-            menuStrip1.Location = new Point(761, 2);
+            menuStrip1.Location = new Point(709, 21);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(262, 27);
             menuStrip1.TabIndex = 15;
@@ -330,7 +330,7 @@
             // return_image
             // 
             return_image.Image = (Image)resources.GetObject("return_image.Image");
-            return_image.Location = new Point(742, 12);
+            return_image.Location = new Point(943, 2);
             return_image.Name = "return_image";
             return_image.Size = new Size(16, 16);
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;

@@ -39,7 +39,9 @@ namespace Hotel_Philoxenia.Forms
 
         private void AdminMainFormRoomsBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction");
+            RoomClass roomClass = new RoomClass();
+            roomClass.Show();
+            this.Hide();
         }
 
         private void AdminMainFormBookingsBtn_Click(object sender, EventArgs e)
