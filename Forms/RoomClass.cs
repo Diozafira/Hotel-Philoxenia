@@ -14,9 +14,10 @@ namespace Hotel_Philoxenia.Forms
         {
             InitializeComponent();
             _context = new HotelContext();
-            LoadCustomers();
+            LoadRooms();
+            LoadHotels();
 
-            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+            dataGridViewRooms.SelectionChanged += DataGridView1_SelectionChanged;
             this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
 
         }
@@ -38,86 +39,96 @@ namespace Hotel_Philoxenia.Forms
         {
             if (e.ClickedItem == addToolStripMenuItem)
             {
-                AddCustomer();
+                AddRoom();
             }
             else if (e.ClickedItem == updateToolStripMenuItem)
             {
-                UpdateCustomer();
+                UpdateRoom();
             }
             else if (e.ClickedItem == deleteToolStripMenuItem)
             {
-                DeleteCustomer();
+                DeleteRoom();
             }
             else if (e.ClickedItem == viewToolStripMenuItem)
             {
-                LoadCustomers();
+                LoadRooms();
             }
         }
 
-        private void LoadCustomers()
+        private void LoadRooms()
         {
-            customerBindingSource.DataSource = _context.Customers.AsNoTracking().ToList();
+            roomBindingSource.DataSource = _context.Rooms.ToList();
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow?.DataBoundItem is Customer selected)
+            if (dataGridViewRooms.CurrentRow?.DataBoundItem is Room selected)
             {
                 textBox2_roomid.Text = selected.Id.ToString();
-                textBox3_roomNumber.Text = selected.SurName;
-                textBox4_roomType.Text = selected.LastName;
-                textBox5_priceperNight.Text = selected.Email;
+                textBox3_roomNumber.Text = selected.RoomNumber;
+                textBox4_roomType.Text = selected.Type;
+                textBox5_priceperNight.Text = selected.PricePerNight.ToString("F2");
             }
         }
 
-        private void AddCustomer()
+        private void AddRoom()
         {
-            var newCustomer = new Customer
+            if (comboBoxHotels.SelectedValue == null)
             {
-                SurName = textBox3_roomNumber.Text,
-                LastName = textBox4_roomType.Text,
-                Email = textBox5_priceperNight.Text,
-                Telephone = textBox7.Text
+                MessageBox.Show("Please select a hotel before adding a room.");
+                return;
+            }
+
+            var newRoom = new Room
+            {
+                RoomNumber = textBox3_roomNumber.Text,
+                Type = textBox4_roomType.Text,
+                PricePerNight = decimal.Parse(textBox5_priceperNight.Text),
+                IsAvailable = IsAvaillable.Checked,
+                HotelId = (int)comboBoxHotels.SelectedValue 
             };
 
-            _context.Customers.Add(newCustomer);
+            _context.Rooms.Add(newRoom);
             _context.SaveChanges();
-            LoadCustomers();
+            LoadRooms();
             ClearFields();
         }
 
-        private void UpdateCustomer()
+        private void UpdateRoom()
         {
             if (int.TryParse(textBox2_roomid.Text, out int id))
             {
-                var customer = _context.Customers.Find(id);
-                if (customer != null)
+                var room = _context.Rooms.Find(id);
+                if (room != null)
                 {
-                    customer.SurName = textBox3_roomNumber.Text;
-                    customer.LastName = textBox4_roomType.Text;
-                    customer.Email = textBox5_priceperNight.Text;
-                    
-
-                    _context.SaveChanges();
-                    LoadCustomers();
-                    ClearFields();
+                    room.RoomNumber = textBox3_roomNumber.Text;
+                    room.Type = textBox4_roomType.Text;
+                    room.PricePerNight = decimal.Parse(textBox5_priceperNight.Text);
+                    // IsAvailable = IsAvailable.Checked;
                 }
+                ;
+
+
+                _context.SaveChanges();
+                LoadRooms();
+                ClearFields();
             }
         }
 
-        private void DeleteCustomer()
+
+        private void DeleteRoom()
         {
             if (int.TryParse(textBox2_roomid.Text, out int id))
             {
-                var customer = _context.Customers.Find(id);
-                if (customer != null)
+                var room = _context.Rooms.Find(id);
+                if (room != null)
                 {
                     var confirm = MessageBox.Show("Are you sure for this deletion?", "Confirm", MessageBoxButtons.YesNo);
                     if (confirm == DialogResult.Yes)
                     {
-                        _context.Customers.Remove(customer);
+                        _context.Rooms.Remove(room);
                         _context.SaveChanges();
-                        LoadCustomers();
+                        LoadRooms();
                         ClearFields();
                     }
                 }
@@ -130,6 +141,31 @@ namespace Hotel_Philoxenia.Forms
             textBox3_roomNumber.Text = "";
             textBox4_roomType.Text = "";
             textBox5_priceperNight.Text = "";
+        }
+
+
+        private void LoadHotels()
+        {
+            var hotels = _context.Hotels.ToList();
+            comboBoxHotels.DataSource = hotels;
+            comboBoxHotels.DisplayMember = "Name";    // Adjust this if your Hotel model has a different property for the name
+            comboBoxHotels.ValueMember = "Id";        // Primary key
+        }
+
+
+        private void textBox2_roomid_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewRooms_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
