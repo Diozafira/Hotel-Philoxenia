@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,12 @@ namespace Hotel_Philoxenia.Models
         public string Type { get; set; }  // e.g., Single, Double, Suite
         public decimal PricePerNight { get; set; }
         public bool IsAvailable { get; set; }
+        
         public int HotelId { get; set; }
+        public int Capacity { get; set; }
 
         public Hotel Hotel { get; set; }
         public List<Booking> Bookings { get; set; }
+        
     }
 }

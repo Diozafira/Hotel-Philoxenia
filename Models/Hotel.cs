@@ -12,7 +12,7 @@ namespace Hotel_Philoxenia.Models
         public string Name { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
 
-        public List<Room> Rooms { get; set; }
+        public List<Room> Rooms { get; set; } = new List<Room>();
     }
 
 }
