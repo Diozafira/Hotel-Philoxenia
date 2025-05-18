@@ -13,6 +13,7 @@ namespace Hotel_Philoxenia.Models
         public string RoomNumber { get; set; }
         public string Type { get; set; }  // e.g., Single, Double, Suite
         public decimal PricePerNight { get; set; }
+        
         public bool IsAvailable { get; set; }
         
         public int HotelId { get; set; }

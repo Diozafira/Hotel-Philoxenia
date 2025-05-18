@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Hotel_Philoxenia.Models;
+using System.Configuration;
 
 namespace Hotel_Philoxenia
 {
@@ -16,10 +17,19 @@ namespace Hotel_Philoxenia
         public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connectionString = "server=localhost;database=hotel_db;user=root;password=Govo1986;";
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            base.OnConfiguring(optionsBuilder);
+            var connString = ConfigurationManager.ConnectionStrings["LocalHost"].ConnectionString;
+
+            optionsBuilder.UseMySql(connString, ServerVersion.AutoDetect(connString))
+                .LogTo(s => System.Diagnostics.Debug.WriteLine("[EF Query] " + s));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 }
