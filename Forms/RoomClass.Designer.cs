@@ -30,13 +30,15 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomClass));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             roomBindingSource = new BindingSource(components);
             button1 = new Button();
             textBox1 = new TextBox();
             pictureBox2 = new PictureBox();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            dataGridViewRooms = new DataGridView();
+            RoomsClass = new DataGridView();
+            roomBindingSource2 = new BindingSource(components);
             roomBindingSource1 = new BindingSource(components);
             hotelBindingSource = new BindingSource(components);
             toolTip1 = new ToolTip(components);
@@ -69,7 +71,8 @@
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewRooms).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)RoomsClass).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)hotelBindingSource).BeginInit();
             menuStrip1.SuspendLayout();
@@ -145,23 +148,25 @@
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
             // 
-            // dataGridViewRooms
+            // RoomsClass
             // 
-            dataGridViewRooms.AutoGenerateColumns = false;
-            dataGridViewRooms.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewRooms.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewRooms.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, IsAvailable, Hotel });
-            dataGridViewRooms.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Hotel", true));
-            dataGridViewRooms.DataSource = roomBindingSource1;
-            dataGridViewRooms.GridColor = Color.FromArgb(255, 128, 0);
-            dataGridViewRooms.Location = new Point(293, 290);
-            dataGridViewRooms.Margin = new Padding(3, 2, 3, 2);
-            dataGridViewRooms.Name = "dataGridViewRooms";
-            dataGridViewRooms.ReadOnly = true;
-            dataGridViewRooms.RowHeadersWidth = 51;
-            dataGridViewRooms.Size = new Size(651, 200);
-            dataGridViewRooms.TabIndex = 13;
-            dataGridViewRooms.CellContentClick += dataGridViewRooms_CellContentClick;
+            RoomsClass.AllowUserToAddRows = false;
+            RoomsClass.AllowUserToDeleteRows = false;
+            RoomsClass.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            RoomsClass.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            RoomsClass.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, IsAvailable, Hotel });
+            RoomsClass.GridColor = Color.FromArgb(255, 128, 0);
+            RoomsClass.Location = new Point(293, 290);
+            RoomsClass.Margin = new Padding(3, 2, 3, 2);
+            RoomsClass.Name = "RoomsClass";
+            RoomsClass.ReadOnly = true;
+            RoomsClass.RowHeadersWidth = 51;
+            RoomsClass.Size = new Size(651, 200);
+            RoomsClass.TabIndex = 13;
+            // 
+            // roomBindingSource2
+            // 
+            roomBindingSource2.DataSource = typeof(Models.Room);
             // 
             // roomBindingSource1
             // 
@@ -275,7 +280,6 @@
             textBox2_roomid.ReadOnly = true;
             textBox2_roomid.Size = new Size(241, 23);
             textBox2_roomid.TabIndex = 22;
-            textBox2_roomid.TextChanged += textBox2_roomid_TextChanged;
             // 
             // textBox3_roomNumber
             // 
@@ -381,6 +385,9 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.DataPropertyName = "PricePerNight";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = "C2";
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewTextBoxColumn3.HeaderText = "PricePerNight";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -394,10 +401,11 @@
             // 
             // Hotel
             // 
-            Hotel.DataPropertyName = "Hotel";
+            Hotel.DataPropertyName = "HotelName";
             Hotel.HeaderText = "Hotel";
             Hotel.Name = "Hotel";
             Hotel.ReadOnly = true;
+            Hotel.Resizable = DataGridViewTriState.True;
             Hotel.SortMode = DataGridViewColumnSortMode.Programmatic;
             // 
             // RoomClass
@@ -421,7 +429,7 @@
             Controls.Add(Type);
             Controls.Add(RoomNumber);
             Controls.Add(roomid);
-            Controls.Add(dataGridViewRooms);
+            Controls.Add(RoomsClass);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(pictureBox2);
@@ -432,10 +440,12 @@
             MainMenuStrip = menuStrip1;
             Margin = new Padding(3, 2, 3, 2);
             Name = "RoomClass";
+            Text = "RoomsClass";
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewRooms).EndInit();
+            ((System.ComponentModel.ISupportInitialize)RoomsClass).EndInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource2).EndInit();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)hotelBindingSource).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -457,7 +467,7 @@
         private PictureBox pictureBox1;
         private DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
         private BindingSource roomBindingSource;
-        private DataGridView dataGridViewRooms;
+        private DataGridView RoomsClass;
         private DataGridViewTextBoxColumn telephoneDataGridViewTextBoxColumn;
         private ToolTip toolTip1;
         private MenuStrip menuStrip1;
@@ -483,6 +493,7 @@
         private BindingSource roomsBindingSource;
         private Button button2prev;
         private Button button3next;
+        private BindingSource roomBindingSource2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

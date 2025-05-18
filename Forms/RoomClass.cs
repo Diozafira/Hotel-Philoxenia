@@ -11,10 +11,7 @@ namespace Hotel_Philoxenia.Forms
     public partial class RoomClass : Form
     {
         private readonly HotelContext _context;
-        private int currentPage = 1;
-        private int pageSize = 10;
-        private int totalPages = 1;
-        private List<Room> allRooms = new List<Room>();
+        
 
         
 
@@ -26,53 +23,76 @@ namespace Hotel_Philoxenia.Forms
             LoadRooms();
             LoadHotels();
 
-            dataGridViewRooms.SelectionChanged += DataGridView1_SelectionChanged;
-            return_image.Click += ReturnToAdminForm_Click;
-
+            RoomsClass.SelectionChanged += DataGridView1_SelectionChanged;
+            this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
+           
+            addToolStripMenuItem.Click += (s, e) => AddRoom();
+            updateToolStripMenuItem.Click += (s, e) => UpdateRoom();
+            deleteToolStripMenuItem.Click += (s, e) => DeleteRoom();
+            viewToolStripMenuItem.Click += (s, e) => LoadRooms();
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ReturnToAdminForm_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            AdminMainForm adminMainForm = new AdminMainForm();
+            adminMainForm.Show();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == addToolStripMenuItem)
+            {
+                AddRoom();
+            }
+            else if (e.ClickedItem == updateToolStripMenuItem)
+            {
+                UpdateRoom();
+            }
+            else if (e.ClickedItem == deleteToolStripMenuItem)
+            {
+                DeleteRoom();
+            }
+            else if (e.ClickedItem == viewToolStripMenuItem)
+            {
+                LoadRooms();
+            }
+        }
 
 
         private void LoadRooms()
         {
-            allRooms = _context.Rooms
+            roomBindingSource2.DataSource = _context.Rooms
                 .Include(r => r.Hotel)
-                .OrderBy(r => r.Id)
+                .AsNoTracking()
                 .ToList();
 
-            totalPages = (int)Math.Ceiling(allRooms.Count / (double)pageSize);
-            DisplayPage(currentPage);
+            RoomsClass.DataSource = roomBindingSource2; 
+            roomBindingSource2.ResetBindings(false);
+            if (RoomsClass.Columns.Contains("HotelId"))
+                RoomsClass.Columns["HotelId"].Visible = false;
+
+            if (RoomsClass.Columns.Contains("Hotel"))
+                RoomsClass.Columns["Hotel"].Visible = false;
         }
 
-        private void DisplayPage(int page)
-        {
-            var roomsToDisplay = allRooms
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
-            var displayRooms = roomsToDisplay.Select(r => new
-            {
-                r.RoomNumber,
-                r.Type,
-                r.PricePerNight,
-                r.IsAvailable,
-                Hotel = r.Hotel != null ? r.Hotel.Name : "N/A"
-            }).ToList();
-
-            dataGridViewRooms.DataSource = roomsToDisplay;
-
-        }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridViewRooms.CurrentRow?.DataBoundItem is Room selected)
+            if (RoomsClass.CurrentRow?.DataBoundItem is Room selected)
             {
-                textBox3_roomNumber.Text = selected.RoomNumber.ToString();
+                textBox2_roomid.Text = selected.Id.ToString();
+                textBox3_roomNumber.Text = selected.RoomNumber;
                 textBox4_roomType.Text = selected.Type;
-                textBox5_priceperNight.Text = selected.PricePerNight.ToString();
-                
+                textBox5_priceperNight.Text = selected.PricePerNight.ToString("0.00");
+                IsAvaillable.Checked = selected.IsAvailable;
+                comboBoxHotel.SelectedValue = selected.HotelId;
             }
         }
 
@@ -95,7 +115,6 @@ namespace Hotel_Philoxenia.Forms
 
             _context.Rooms.Add(newRoom);
             _context.SaveChanges();
-            currentPage = 1;
             LoadRooms();
             ClearFields();
         }
@@ -113,12 +132,15 @@ namespace Hotel_Philoxenia.Forms
                     room.HotelId = (int)comboBoxHotel.SelectedValue;
                     room.IsAvailable = IsAvaillable.Checked;
 
+
+
                     _context.SaveChanges();
                     LoadRooms();
                     ClearFields();
                 }
             }
         }
+        
 
         private void DeleteRoom()
         {
@@ -132,7 +154,6 @@ namespace Hotel_Philoxenia.Forms
                     {
                         _context.Rooms.Remove(room);
                         _context.SaveChanges();
-                        currentPage = 1;
                         LoadRooms();
                         ClearFields();
                     }
@@ -146,6 +167,8 @@ namespace Hotel_Philoxenia.Forms
             textBox3_roomNumber.Text = "";
             textBox4_roomType.Text = "";
             textBox5_priceperNight.Text = "";
+            IsAvaillable.Checked = true;
+            comboBoxHotel.SelectedIndex = -1;
         }
 
         private void LoadHotels()
@@ -156,24 +179,14 @@ namespace Hotel_Philoxenia.Forms
             comboBoxHotel.ValueMember = "Id";
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        
 
-        private void ReturnToAdminForm_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            AdminMainForm adminMainForm = new AdminMainForm();
-            adminMainForm.Show();
-        }
+       
 
-        private void textBox2_roomid_TextChanged(object sender, EventArgs e) { }
-        private void dataGridViewRooms_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void label7_Click(object sender, EventArgs e) { }
+      
 
         private void button2_Click(object sender, EventArgs e)
-        {
+       {
 
         }
     }
