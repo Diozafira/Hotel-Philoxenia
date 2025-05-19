@@ -188,6 +188,6 @@ namespace Hotel_Philoxenia.Forms
         private void button2_Click(object sender, EventArgs e)
        {
 
-        }
+       }
     }
 }

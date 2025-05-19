@@ -31,7 +31,7 @@ namespace Hotel_Philoxenia.Forms
 
         private void AdminMainFormCustBtn_Click(object sender, EventArgs e)
         {
-            
+
             CustomerClass customerClass = new CustomerClass();
             customerClass.Show();
             this.Hide();
@@ -46,7 +46,9 @@ namespace Hotel_Philoxenia.Forms
 
         private void AdminMainFormBookingsBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction");
+            BookingClass bookingClass = new BookingClass();
+            bookingClass.Show();
+            this.Hide();
         }
 
         private void AdminMainFormToolsBtn_Click(object sender, EventArgs e)
@@ -63,5 +65,7 @@ namespace Hotel_Philoxenia.Forms
         {
             Application.Exit();
         }
+
+       
     }
 }

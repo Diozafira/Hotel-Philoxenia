@@ -105,6 +105,7 @@
             AdminMainFormBookingsBtn.TabIndex = 4;
             AdminMainFormBookingsBtn.Text = "Bookings";
             AdminMainFormBookingsBtn.UseVisualStyleBackColor = true;
+            //AdminMainFormBookingsBtn.Click += AdminMainFormBookingsBtn_Click_1;
             // 
             // AdminMainFormRoomsBtn
             // 
