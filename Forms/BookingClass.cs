@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Hotel_Philoxenia.Forms
@@ -12,19 +13,28 @@ namespace Hotel_Philoxenia.Forms
     {
         private readonly HotelContext _context;
 
-
-
-
         public BookingClass()
         {
             InitializeComponent();
             _context = new HotelContext();
-
         }
 
-    
 
-    private void button1_Click(object sender, EventArgs e)
+
+        private void BtnSearchRoom_Click(object sender, EventArgs e)
+        {
+            _context.Bookings.Where(r =>
+                ((r.ReservationDateFrom >= DtReservationFrom.Value &&
+                r.ReservationDateFrom <= DtReservationTo.Value) ||
+                (r.ReservationDateTo >= DtReservationFrom.Value &&
+                r.ReservationDateTo <= DtReservationTo.Value)) &&
+                r.Room.Capacity >= Convert.ToInt32(NudPersons.Value)
+            );
+
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -35,5 +45,7 @@ namespace Hotel_Philoxenia.Forms
             AdminMainForm adminMainForm = new AdminMainForm();
             adminMainForm.Show();
         }
+
+        
     }
 }
