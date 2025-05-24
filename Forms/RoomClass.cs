@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
+using System.Numerics;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -11,9 +13,11 @@ namespace Hotel_Philoxenia.Forms
     public partial class RoomClass : Form
     {
         private readonly HotelContext _context;
-        
 
-        
+        private int currentPage = 1;
+        private int pageRecords = 5;
+        private int totalPages = 0;
+
 
         public RoomClass()
         {
@@ -25,7 +29,7 @@ namespace Hotel_Philoxenia.Forms
 
             RoomsClass.SelectionChanged += DataGridView1_SelectionChanged;
             this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
-           
+
             addToolStripMenuItem.Click += (s, e) => AddRoom();
             updateToolStripMenuItem.Click += (s, e) => UpdateRoom();
             deleteToolStripMenuItem.Click += (s, e) => DeleteRoom();
@@ -68,18 +72,27 @@ namespace Hotel_Philoxenia.Forms
 
         private void LoadRooms()
         {
+
+            int totalRooms = _context.Rooms.Count();
+            totalPages = totalRooms / pageRecords;
             roomBindingSource2.DataSource = _context.Rooms
                 .Include(r => r.Hotel)
                 .AsNoTracking()
+            .OrderBy(r => r.RoomNumber)
+                .Skip((currentPage - 1) * pageRecords)
+                .Take(pageRecords)
                 .ToList();
 
-            RoomsClass.DataSource = roomBindingSource2; 
+            RoomsClass.DataSource = roomBindingSource2;
             roomBindingSource2.ResetBindings(false);
             if (RoomsClass.Columns.Contains("HotelId"))
                 RoomsClass.Columns["HotelId"].Visible = false;
 
             if (RoomsClass.Columns.Contains("Hotel"))
                 RoomsClass.Columns["Hotel"].Visible = false;
+
+            labelPageNum.Text = $"Page {currentPage} of {totalPages}";
+
         }
 
 
@@ -101,6 +114,13 @@ namespace Hotel_Philoxenia.Forms
             if (comboBoxHotel.SelectedValue == null)
             {
                 MessageBox.Show("Please select a hotel before adding a room.");
+                return;
+            }
+
+            string roomType = textBox4_roomType.Text.Trim();
+            if (roomType != "Single" && roomType != "Double" && roomType != "Suite")
+            {
+                MessageBox.Show("Please enter a valid room type (Single, Double or Suite).");
                 return;
             }
 
@@ -140,7 +160,7 @@ namespace Hotel_Philoxenia.Forms
                 }
             }
         }
-        
+
 
         private void DeleteRoom()
         {
@@ -179,15 +199,34 @@ namespace Hotel_Philoxenia.Forms
             comboBoxHotel.ValueMember = "Id";
         }
 
+        private void GoToPreviousPage()
+        {
+            if (currentPage > 1)
+            {
+                currentPage--;
+                LoadRooms();
+            }
+        }
+
+        private void GoToNextPage()
+        {
+            if (currentPage < totalPages)
+            {
+                currentPage++;
+                LoadRooms();
+            }
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            GoToPreviousPage();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            GoToNextPage();
+        }
+
         
-
-       
-
-      
-
-        private void button2_Click(object sender, EventArgs e)
-       {
-
-       }
     }
 }

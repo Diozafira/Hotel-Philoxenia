@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomClass));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             roomBindingSource = new BindingSource(components);
             button1 = new Button();
             textBox1 = new TextBox();
@@ -38,6 +38,11 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             RoomsClass = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            IsAvailable = new DataGridViewCheckBoxColumn();
+            Hotel = new DataGridViewTextBoxColumn();
             roomBindingSource2 = new BindingSource(components);
             roomBindingSource1 = new BindingSource(components);
             hotelBindingSource = new BindingSource(components);
@@ -61,13 +66,9 @@
             comboBoxHotel = new ComboBox();
             roomsBindingSource = new BindingSource(components);
             label2 = new Label();
-            button2prev = new Button();
-            button3next = new Button();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            IsAvailable = new DataGridViewCheckBoxColumn();
-            Hotel = new DataGridViewTextBoxColumn();
+            btnPrevious = new Button();
+            btnNext = new Button();
+            labelPageNum = new Label();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -161,8 +162,48 @@
             RoomsClass.Name = "RoomsClass";
             RoomsClass.ReadOnly = true;
             RoomsClass.RowHeadersWidth = 51;
-            RoomsClass.Size = new Size(651, 200);
+            RoomsClass.Size = new Size(651, 152);
             RoomsClass.TabIndex = 13;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "RoomNumber";
+            dataGridViewTextBoxColumn1.HeaderText = "RoomNumber";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "Type";
+            dataGridViewTextBoxColumn2.HeaderText = "Type";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "PricePerNight";
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = "C2";
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewTextBoxColumn3.HeaderText = "PricePerNight";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // IsAvailable
+            // 
+            IsAvailable.DataPropertyName = "IsAvailable";
+            IsAvailable.HeaderText = "IsAvailable";
+            IsAvailable.Name = "IsAvailable";
+            IsAvailable.ReadOnly = true;
+            // 
+            // Hotel
+            // 
+            Hotel.DataPropertyName = "HotelName";
+            Hotel.HeaderText = "Hotel";
+            Hotel.Name = "Hotel";
+            Hotel.ReadOnly = true;
+            Hotel.Resizable = DataGridViewTriState.True;
+            Hotel.SortMode = DataGridViewColumnSortMode.Programmatic;
             // 
             // roomBindingSource2
             // 
@@ -345,68 +386,44 @@
             label2.TabIndex = 31;
             label2.Text = "Hotel Building";
             // 
-            // button2prev
+            // btnPrevious
             // 
-            button2prev.BackColor = Color.Transparent;
-            button2prev.ForeColor = Color.OrangeRed;
-            button2prev.Location = new Point(788, 495);
-            button2prev.Name = "button2prev";
-            button2prev.Size = new Size(75, 23);
-            button2prev.TabIndex = 32;
-            button2prev.Text = "previous";
-            button2prev.UseVisualStyleBackColor = false;
-            button2prev.Click += button2_Click;
+            btnPrevious.BackColor = Color.Transparent;
+            btnPrevious.ForeColor = Color.OrangeRed;
+            btnPrevious.Location = new Point(788, 458);
+            btnPrevious.Name = "btnPrevious";
+            btnPrevious.Size = new Size(75, 23);
+            btnPrevious.TabIndex = 32;
+            btnPrevious.Text = "previous";
+            btnPrevious.UseVisualStyleBackColor = false;
+            btnPrevious.Click += btnPrevious_Click;
             // 
-            // button3next
+            // btnNext
             // 
-            button3next.BackColor = Color.Transparent;
-            button3next.ForeColor = Color.OrangeRed;
-            button3next.Location = new Point(869, 495);
-            button3next.Name = "button3next";
-            button3next.Size = new Size(75, 23);
-            button3next.TabIndex = 33;
-            button3next.Text = "next";
-            button3next.UseVisualStyleBackColor = false;
+            btnNext.BackColor = Color.Transparent;
+            btnNext.ForeColor = Color.OrangeRed;
+            btnNext.Location = new Point(869, 458);
+            btnNext.Name = "btnNext";
+            btnNext.Size = new Size(75, 23);
+            btnNext.TabIndex = 33;
+            btnNext.Text = "next";
+            btnNext.UseVisualStyleBackColor = false;
+            btnNext.Click += btnNext_Click;
             // 
-            // dataGridViewTextBoxColumn1
+            // labelPageNum
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "RoomNumber";
-            dataGridViewTextBoxColumn1.HeaderText = "RoomNumber";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "Type";
-            dataGridViewTextBoxColumn2.HeaderText = "Type";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "PricePerNight";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = "C2";
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewTextBoxColumn3.HeaderText = "PricePerNight";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // IsAvailable
-            // 
-            IsAvailable.DataPropertyName = "IsAvailable";
-            IsAvailable.HeaderText = "IsAvailable";
-            IsAvailable.Name = "IsAvailable";
-            IsAvailable.ReadOnly = true;
-            // 
-            // Hotel
-            // 
-            Hotel.DataPropertyName = "HotelName";
-            Hotel.HeaderText = "Hotel";
-            Hotel.Name = "Hotel";
-            Hotel.ReadOnly = true;
-            Hotel.Resizable = DataGridViewTriState.True;
-            Hotel.SortMode = DataGridViewColumnSortMode.Programmatic;
+            labelPageNum.AutoSize = true;
+            labelPageNum.BackColor = SystemColors.ControlLight;
+            labelPageNum.BorderStyle = BorderStyle.FixedSingle;
+            labelPageNum.Font = new Font("Segoe UI", 9.75F, FontStyle.Italic, GraphicsUnit.Point, 161);
+            labelPageNum.ForeColor = Color.OrangeRed;
+            labelPageNum.Location = new Point(872, 503);
+            labelPageNum.Name = "labelPageNum";
+            labelPageNum.Size = new Size(74, 19);
+            labelPageNum.TabIndex = 34;
+            labelPageNum.Text = "Page 1 of 1";
+            labelPageNum.TextAlign = ContentAlignment.TopCenter;
+            
             // 
             // RoomClass
             // 
@@ -414,8 +431,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(992, 530);
-            Controls.Add(button3next);
-            Controls.Add(button2prev);
+            Controls.Add(labelPageNum);
+            Controls.Add(btnNext);
+            Controls.Add(btnPrevious);
             Controls.Add(label2);
             Controls.Add(comboBoxHotel);
             Controls.Add(IsAvaillable);
@@ -491,13 +509,14 @@
         private ComboBox comboBoxHotel;
         private Label label2;
         private BindingSource roomsBindingSource;
-        private Button button2prev;
-        private Button button3next;
+        private Button btnPrevious;
+        private Button btnNext;
         private BindingSource roomBindingSource2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewCheckBoxColumn IsAvailable;
         private DataGridViewTextBoxColumn Hotel;
+        private Label labelPageNum;
     }
 }
