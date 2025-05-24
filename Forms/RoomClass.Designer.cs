@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomClass));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             roomBindingSource = new BindingSource(components);
             button1 = new Button();
             textBox1 = new TextBox();
@@ -182,9 +182,9 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.DataPropertyName = "PricePerNight";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = "C2";
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = "C2";
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewTextBoxColumn3.HeaderText = "PricePerNight";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -347,6 +347,7 @@
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;
             return_image.TabIndex = 28;
             return_image.TabStop = false;
+            return_image.Click += ReturnToAdminForm_Click;
             // 
             // IsAvaillable
             // 
@@ -423,7 +424,6 @@
             labelPageNum.TabIndex = 34;
             labelPageNum.Text = "Page 1 of 1";
             labelPageNum.TextAlign = ContentAlignment.TopCenter;
-            
             // 
             // RoomClass
             // 

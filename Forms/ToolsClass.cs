@@ -1,4 +1,5 @@
-﻿using Hotel_Philoxenia.Models;
+﻿using Hotel_Philoxenia.Forms;
+using Hotel_Philoxenia.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,25 +7,25 @@ using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Hotel_Philoxenia.Forms
+namespace Hotel_Philoxenia
 {
-    public partial class BookingClass : Form
+    public partial class ToolsClass : Form
     {
         private readonly HotelContext _context;
 
 
 
 
-        public BookingClass()
+        public ToolsClass()
         {
             InitializeComponent();
             _context = new HotelContext();
 
+           
+
         }
 
-    
-
-    private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -34,6 +35,18 @@ namespace Hotel_Philoxenia.Forms
             this.Hide();
             AdminMainForm adminMainForm = new AdminMainForm();
             adminMainForm.Show();
+        }
+
+
+
+
+
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

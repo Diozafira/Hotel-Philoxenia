@@ -28,7 +28,7 @@ namespace Hotel_Philoxenia.Forms
             LoadHotels();
 
             RoomsClass.SelectionChanged += DataGridView1_SelectionChanged;
-            this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
+            //this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
 
             addToolStripMenuItem.Click += (s, e) => AddRoom();
             updateToolStripMenuItem.Click += (s, e) => UpdateRoom();

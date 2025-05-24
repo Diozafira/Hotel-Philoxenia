@@ -53,7 +53,9 @@ namespace Hotel_Philoxenia.Forms
 
         private void AdminMainFormToolsBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Under Construction");
+            ToolsClass toolsClass = new ToolsClass();
+            toolsClass.Show();
+            this.Hide();
         }
 
         private void button1_Click(object sender, EventArgs e)

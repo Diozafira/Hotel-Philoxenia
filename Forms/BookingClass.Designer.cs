@@ -40,10 +40,11 @@
             roomBindingSource1 = new BindingSource(components);
             hotelBindingSource = new BindingSource(components);
             toolTip1 = new ToolTip(components);
+            textBox2_customerId = new TextBox();
+            textBox3 = new TextBox();
             roomid = new Label();
             RoomNumber = new Label();
             PricePerNight = new Label();
-            textBox2_customerId = new TextBox();
             return_image = new PictureBox();
             roomsBindingSource = new BindingSource(components);
             label2 = new Label();
@@ -58,7 +59,6 @@
             dataGridView1 = new DataGridView();
             button2 = new Button();
             label5 = new Label();
-            textBox3 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -87,7 +87,7 @@
             button1.Text = "Log Out";
             button1.TextImageRelation = TextImageRelation.TextAboveImage;
             button1.UseVisualStyleBackColor = false;
-            //button1.Click += button1_Click;
+            button1.Click += button1_Click;
             // 
             // textBox1
             // 
@@ -150,6 +150,24 @@
             // 
             hotelBindingSource.DataSource = typeof(Models.Hotel);
             // 
+            // textBox2_customerId
+            // 
+            textBox2_customerId.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Id", true));
+            textBox2_customerId.Location = new Point(371, 25);
+            textBox2_customerId.Name = "textBox2_customerId";
+            textBox2_customerId.Size = new Size(150, 23);
+            textBox2_customerId.TabIndex = 22;
+            toolTip1.SetToolTip(textBox2_customerId, "Fill the customer's id to make the reservation\r\n");
+            // 
+            // textBox3
+            // 
+            textBox3.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Id", true));
+            textBox3.Location = new Point(637, 25);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(109, 23);
+            textBox3.TabIndex = 49;
+            toolTip1.SetToolTip(textBox3, "Fill the customer's id to make the reservation\r\n");
+            // 
             // roomid
             // 
             roomid.AutoSize = true;
@@ -181,16 +199,6 @@
             PricePerNight.TabIndex = 19;
             PricePerNight.Text = "To";
             // 
-            // textBox2_customerId
-            // 
-            textBox2_customerId.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Id", true));
-            textBox2_customerId.Location = new Point(371, 25);
-            textBox2_customerId.Name = "textBox2_customerId";
-            textBox2_customerId.Size = new Size(150, 23);
-            textBox2_customerId.TabIndex = 22;
-            toolTip1.SetToolTip(textBox2_customerId, "Fill the customer's id to make the reservation\r\n");
-            //textBox2_customerId.TextChanged += this.textBox2_customerId_TextChanged;
-            // 
             // return_image
             // 
             return_image.Image = (Image)resources.GetObject("return_image.Image");
@@ -200,6 +208,7 @@
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;
             return_image.TabIndex = 28;
             return_image.TabStop = false;
+            return_image.Click += ReturnToAdminForm_Click;
             // 
             // roomsBindingSource
             // 
@@ -234,7 +243,6 @@
             label3.Size = new Size(60, 25);
             label3.TabIndex = 38;
             label3.Text = "Room";
-            //label3.Click += this.label3_Click;
             // 
             // comboBox1
             // 
@@ -307,7 +315,6 @@
             button2.TabIndex = 47;
             button2.Text = "Select";
             button2.UseVisualStyleBackColor = true;
-            //button2.Click += this.button2_Click_1;
             // 
             // label5
             // 
@@ -318,18 +325,8 @@
             label5.Size = new Size(88, 15);
             label5.TabIndex = 48;
             label5.Text = "Customer Afm";
-            //label5.Click += this.label5_Click;
             // 
-            // textBox3
-            // 
-            textBox3.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Id", true));
-            textBox3.Location = new Point(637, 25);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(109, 23);
-            textBox3.TabIndex = 49;
-            toolTip1.SetToolTip(textBox3, "Fill the customer's id to make the reservation\r\n");
-            // 
-            // bookings
+            // BookingClass
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -360,7 +357,7 @@
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 2, 3, 2);
-            Name = "bookings";
+            Name = "BookingClass";
             Text = "RoomsClass";
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
