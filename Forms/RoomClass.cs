@@ -78,7 +78,7 @@ namespace Hotel_Philoxenia.Forms
             roomBindingSource2.DataSource = _context.Rooms
                 .Include(r => r.Hotel)
                 .AsNoTracking()
-            .OrderBy(r => r.RoomNumber)
+                .OrderBy(r => r.RoomNumber)
                 .Skip((currentPage - 1) * pageRecords)
                 .Take(pageRecords)
                 .ToList();
@@ -102,6 +102,7 @@ namespace Hotel_Philoxenia.Forms
             {
                 textBox2_roomid.Text = selected.Id.ToString();
                 textBox3_roomNumber.Text = selected.RoomNumber;
+                textBox2Capacity.Text = selected.Capacity.ToString();
                 textBox4_roomType.Text = selected.Type;
                 textBox5_priceperNight.Text = selected.PricePerNight.ToString("0.00");
                 IsAvaillable.Checked = selected.IsAvailable;
@@ -128,6 +129,7 @@ namespace Hotel_Philoxenia.Forms
             {
                 RoomNumber = textBox3_roomNumber.Text,
                 Type = textBox4_roomType.Text,
+                Capacity = int.Parse(textBox2Capacity.Text),
                 PricePerNight = decimal.Parse(textBox5_priceperNight.Text),
                 IsAvailable = IsAvaillable.Checked,
                 HotelId = (int)comboBoxHotel.SelectedValue
@@ -148,6 +150,7 @@ namespace Hotel_Philoxenia.Forms
                 {
                     room.RoomNumber = textBox3_roomNumber.Text;
                     room.Type = textBox4_roomType.Text;
+                    room.Capacity = int.Parse(textBox2Capacity.Text);
                     room.PricePerNight = decimal.Parse(textBox5_priceperNight.Text);
                     room.HotelId = (int)comboBoxHotel.SelectedValue;
                     room.IsAvailable = IsAvaillable.Checked;
@@ -187,6 +190,7 @@ namespace Hotel_Philoxenia.Forms
             textBox3_roomNumber.Text = "";
             textBox4_roomType.Text = "";
             textBox5_priceperNight.Text = "";
+            textBox2Capacity.Text = "";
             IsAvaillable.Checked = true;
             comboBoxHotel.SelectedIndex = -1;
         }

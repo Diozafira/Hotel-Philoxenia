@@ -30,7 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoomClass));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             roomBindingSource = new BindingSource(components);
             button1 = new Button();
             textBox1 = new TextBox();
@@ -69,6 +69,8 @@
             btnPrevious = new Button();
             btnNext = new Button();
             labelPageNum = new Label();
+            label3Capacity = new Label();
+            textBox2Capacity = new TextBox();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -182,9 +184,9 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.DataPropertyName = "PricePerNight";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = "C2";
-            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = "C2";
+            dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewTextBoxColumn3.HeaderText = "PricePerNight";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -367,7 +369,7 @@
             comboBoxHotel.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxHotel.FormattingEnabled = true;
             comboBoxHotel.Items.AddRange(new object[] { "Building A", "Building B" });
-            comboBoxHotel.Location = new Point(393, 226);
+            comboBoxHotel.Location = new Point(393, 261);
             comboBoxHotel.Name = "comboBoxHotel";
             comboBoxHotel.Size = new Size(121, 23);
             comboBoxHotel.TabIndex = 30;
@@ -381,7 +383,7 @@
             // 
             label2.AutoSize = true;
             label2.DataBindings.Add(new Binding("Text", roomBindingSource1, "IsAvailable", true));
-            label2.Location = new Point(293, 226);
+            label2.Location = new Point(293, 261);
             label2.Name = "label2";
             label2.Size = new Size(83, 15);
             label2.TabIndex = 31;
@@ -425,12 +427,32 @@
             labelPageNum.Text = "Page 1 of 1";
             labelPageNum.TextAlign = ContentAlignment.TopCenter;
             // 
+            // label3Capacity
+            // 
+            label3Capacity.AutoSize = true;
+            label3Capacity.DataBindings.Add(new Binding("Text", roomBindingSource1, "Capacity", true));
+            label3Capacity.Location = new Point(293, 230);
+            label3Capacity.Name = "label3Capacity";
+            label3Capacity.Size = new Size(53, 15);
+            label3Capacity.TabIndex = 35;
+            label3Capacity.Text = "Capacity";
+            // 
+            // textBox2Capacity
+            // 
+            textBox2Capacity.DataBindings.Add(new Binding("DataContext", roomBindingSource1, "Capacity", true));
+            textBox2Capacity.Location = new Point(393, 227);
+            textBox2Capacity.Name = "textBox2Capacity";
+            textBox2Capacity.Size = new Size(241, 23);
+            textBox2Capacity.TabIndex = 36;
+            // 
             // RoomClass
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(992, 530);
+            Controls.Add(textBox2Capacity);
+            Controls.Add(label3Capacity);
             Controls.Add(labelPageNum);
             Controls.Add(btnNext);
             Controls.Add(btnPrevious);
@@ -518,5 +540,7 @@
         private DataGridViewCheckBoxColumn IsAvailable;
         private DataGridViewTextBoxColumn Hotel;
         private Label labelPageNum;
+        private Label label3Capacity;
+        private TextBox textBox2Capacity;
     }
 }

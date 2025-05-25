@@ -55,11 +55,6 @@
             NudPersons = new NumericUpDown();
             BtnSearchRoom = new Button();
             dataGridView1 = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            roomNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            HotelName = new DataGridViewTextBoxColumn();
-            Column1 = new DataGridViewTextBoxColumn();
             roomBindingSource3 = new BindingSource(components);
             button2 = new Button();
             button3 = new Button();
@@ -68,6 +63,11 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Capacity = new DataGridViewTextBoxColumn();
+            roomNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            HotelName = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -302,48 +302,14 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, roomNumberDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, HotelName, Column1 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Capacity, roomNumberDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, HotelName });
             dataGridView1.DataSource = roomBindingSource3;
             dataGridView1.GridColor = SystemColors.InactiveCaption;
-            dataGridView1.Location = new Point(360, 186);
+            dataGridView1.Location = new Point(360, 172);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(520, 134);
             dataGridView1.TabIndex = 41;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // roomNumberDataGridViewTextBoxColumn
-            // 
-            roomNumberDataGridViewTextBoxColumn.DataPropertyName = "RoomNumber";
-            roomNumberDataGridViewTextBoxColumn.HeaderText = "RoomNumber";
-            roomNumberDataGridViewTextBoxColumn.Name = "roomNumberDataGridViewTextBoxColumn";
-            roomNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // HotelName
-            // 
-            HotelName.DataPropertyName = "HotelName";
-            HotelName.HeaderText = "HotelName";
-            HotelName.Name = "HotelName";
-            HotelName.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Capacity";
-            Column1.Name = "Column1";
-            Column1.ReadOnly = true;
             // 
             // roomBindingSource3
             // 
@@ -355,7 +321,7 @@
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
             button2.TabIndex = 42;
-            button2.Text = "button2";
+            button2.Text = "Select";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -364,7 +330,7 @@
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 43;
-            button3.Text = "button3";
+            button3.Text = "Add New";
             button3.UseVisualStyleBackColor = true;
             // 
             // comboBox1
@@ -403,6 +369,41 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(163, 23);
             textBox4.TabIndex = 48;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Capacity
+            // 
+            Capacity.DataPropertyName = "Capacity";
+            Capacity.HeaderText = "Capacity";
+            Capacity.Name = "Capacity";
+            Capacity.ReadOnly = true;
+            // 
+            // roomNumberDataGridViewTextBoxColumn
+            // 
+            roomNumberDataGridViewTextBoxColumn.DataPropertyName = "RoomNumber";
+            roomNumberDataGridViewTextBoxColumn.HeaderText = "RoomNumber";
+            roomNumberDataGridViewTextBoxColumn.Name = "roomNumberDataGridViewTextBoxColumn";
+            roomNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // HotelName
+            // 
+            HotelName.DataPropertyName = "HotelName";
+            HotelName.HeaderText = "HotelName";
+            HotelName.Name = "HotelName";
+            HotelName.ReadOnly = true;
             // 
             // BookingClass
             // 
@@ -487,11 +488,6 @@
         private Button BtnSearchRoom;
         private DataGridView dataGridView1;
         private BindingSource roomBindingSource3;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn roomNumberDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn HotelName;
-        private DataGridViewTextBoxColumn Column1;
         private Button button2;
         private Button button3;
         private ComboBox comboBox1;
@@ -499,5 +495,10 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn Capacity;
+        private DataGridViewTextBoxColumn roomNumberDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn HotelName;
     }
 }
