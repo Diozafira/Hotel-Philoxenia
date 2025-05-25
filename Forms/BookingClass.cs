@@ -23,17 +23,21 @@ namespace Hotel_Philoxenia.Forms
 
         private void BtnSearchRoom_Click(object sender, EventArgs e)
         {
-            _context.Bookings.Where(r =>
-                ((r.ReservationDateFrom >= DtReservationFrom.Value &&
-                r.ReservationDateFrom <= DtReservationTo.Value) ||
-                (r.ReservationDateTo >= DtReservationFrom.Value &&
-                r.ReservationDateTo <= DtReservationTo.Value)) &&
-                r.Room.Capacity >= Convert.ToInt32(NudPersons.Value)
-            );
+            int numberOfPersons = (int)NudPersons.Value;
 
+            ////var availableBookings = _context.Bookings
+            //    .Include(b => b.Room)
+            //    .Where(r =>
+            //        ((r.ReservationDateFrom >= DtReservationFrom.Value &&
+            //          r.ReservationDateFrom <= DtReservationTo.Value) ||
+            //         (r.ReservationDateTo >= DtReservationFrom.Value &&
+            //          r.ReservationDateTo <= DtReservationTo.Value)) &&
+            //          r.Room.Capacity >= NudPersons.Value
+            //    )
+            //    .ToList();
             
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -46,6 +50,38 @@ namespace Hotel_Philoxenia.Forms
             adminMainForm.Show();
         }
 
-        
+        private void BringRooms()
+        {
+            int selectedCapacity = (int)NudPersons.Value;
+
+            var rooms = _context.Rooms
+                .Where(r => r.Capacity >= selectedCapacity)
+                .ToList();
+
+            var customers = _context.Customers
+            .Select(c => new
+         {
+             c.Id,
+             FullName = c.LastName + " " + c.SurName 
+         })
+         .ToList();
+           
+            dataGridView1.DataSource = rooms;
+
+            comboBox2.DataSource = rooms;
+            comboBox2.ValueMember = "Id";
+            comboBox2.DisplayMember = "RoomNumber";
+
+            comboBox1.DataSource = customers;
+            comboBox1.ValueMember = "Id";
+            comboBox1.DisplayMember = "Fullname";
+            
+
+        }
+
+        private void NudPersons_ValueChanged(object sender, EventArgs e)
+        {
+            BringRooms();
+        }
     }
 }

@@ -44,7 +44,7 @@
             roomsBindingSource = new BindingSource(components);
             label2 = new Label();
             label3 = new Label();
-            label4 = new Label();
+            label4Capacity = new Label();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -55,19 +55,21 @@
             NudPersons = new NumericUpDown();
             BtnSearchRoom = new Button();
             dataGridView1 = new DataGridView();
+            Capacity = new DataGridViewTextBoxColumn();
+            HotelName = new DataGridViewTextBoxColumn();
+            roomNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            pricePerNightDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            isAvailableDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             roomBindingSource3 = new BindingSource(components);
             button2 = new Button();
             button3 = new Button();
             comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
+            roomBindingSource4 = new BindingSource(components);
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Capacity = new DataGridViewTextBoxColumn();
-            roomNumberDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            HotelName = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -79,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)NudPersons).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource4).BeginInit();
             SuspendLayout();
             // 
             // roomBindingSource
@@ -199,16 +202,16 @@
             label3.TabIndex = 30;
             label3.Text = "Date to";
             // 
-            // label4
+            // label4Capacity
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
-            label4.ForeColor = Color.FromArgb(0, 192, 192);
-            label4.Location = new Point(248, 140);
-            label4.Name = "label4";
-            label4.Size = new Size(76, 21);
-            label4.TabIndex = 31;
-            label4.Text = "Capacity";
+            label4Capacity.AutoSize = true;
+            label4Capacity.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label4Capacity.ForeColor = Color.FromArgb(0, 192, 192);
+            label4Capacity.Location = new Point(248, 140);
+            label4Capacity.Name = "label4Capacity";
+            label4Capacity.Size = new Size(76, 21);
+            label4Capacity.TabIndex = 31;
+            label4Capacity.Text = "Capacity";
             // 
             // label5
             // 
@@ -286,6 +289,7 @@
             NudPersons.Name = "NudPersons";
             NudPersons.Size = new Size(61, 23);
             NudPersons.TabIndex = 39;
+            NudPersons.ValueChanged += NudPersons_ValueChanged;
             // 
             // BtnSearchRoom
             // 
@@ -302,14 +306,56 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, Capacity, roomNumberDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, HotelName });
-            dataGridView1.DataSource = roomBindingSource3;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Capacity, HotelName, roomNumberDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, pricePerNightDataGridViewTextBoxColumn, isAvailableDataGridViewCheckBoxColumn });
+            dataGridView1.DataSource = roomBindingSource2;
             dataGridView1.GridColor = SystemColors.InactiveCaption;
             dataGridView1.Location = new Point(360, 172);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.Size = new Size(520, 134);
             dataGridView1.TabIndex = 41;
+            // 
+            // Capacity
+            // 
+            Capacity.DataPropertyName = "Capacity";
+            Capacity.HeaderText = "Capacity";
+            Capacity.Name = "Capacity";
+            Capacity.ReadOnly = true;
+            // 
+            // HotelName
+            // 
+            HotelName.DataPropertyName = "HotelName";
+            HotelName.HeaderText = "HotelName";
+            HotelName.Name = "HotelName";
+            HotelName.ReadOnly = true;
+            // 
+            // roomNumberDataGridViewTextBoxColumn
+            // 
+            roomNumberDataGridViewTextBoxColumn.DataPropertyName = "RoomNumber";
+            roomNumberDataGridViewTextBoxColumn.HeaderText = "RoomNumber";
+            roomNumberDataGridViewTextBoxColumn.Name = "roomNumberDataGridViewTextBoxColumn";
+            roomNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            typeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pricePerNightDataGridViewTextBoxColumn
+            // 
+            pricePerNightDataGridViewTextBoxColumn.DataPropertyName = "PricePerNight";
+            pricePerNightDataGridViewTextBoxColumn.HeaderText = "PricePerNight";
+            pricePerNightDataGridViewTextBoxColumn.Name = "pricePerNightDataGridViewTextBoxColumn";
+            pricePerNightDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isAvailableDataGridViewCheckBoxColumn
+            // 
+            isAvailableDataGridViewCheckBoxColumn.DataPropertyName = "IsAvailable";
+            isAvailableDataGridViewCheckBoxColumn.HeaderText = "IsAvailable";
+            isAvailableDataGridViewCheckBoxColumn.Name = "isAvailableDataGridViewCheckBoxColumn";
+            isAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
             // roomBindingSource3
             // 
@@ -343,11 +389,18 @@
             // 
             // comboBox2
             // 
+            comboBox2.DataSource = roomBindingSource2;
+            comboBox2.DisplayMember = "RoomNumber";
             comboBox2.FormattingEnabled = true;
             comboBox2.Location = new Point(360, 396);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(205, 23);
             comboBox2.TabIndex = 45;
+            comboBox2.ValueMember = "Id";
+            // 
+            // roomBindingSource4
+            // 
+            roomBindingSource4.DataSource = typeof(Models.Room);
             // 
             // textBox2
             // 
@@ -358,6 +411,7 @@
             // 
             // textBox3
             // 
+            textBox3.DataBindings.Add(new Binding("DataContext", roomBindingSource2, "PricePerNight", true));
             textBox3.Location = new Point(360, 450);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(205, 23);
@@ -367,43 +421,9 @@
             // 
             textBox4.Location = new Point(805, 497);
             textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
             textBox4.Size = new Size(163, 23);
             textBox4.TabIndex = 48;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // Capacity
-            // 
-            Capacity.DataPropertyName = "Capacity";
-            Capacity.HeaderText = "Capacity";
-            Capacity.Name = "Capacity";
-            Capacity.ReadOnly = true;
-            // 
-            // roomNumberDataGridViewTextBoxColumn
-            // 
-            roomNumberDataGridViewTextBoxColumn.DataPropertyName = "RoomNumber";
-            roomNumberDataGridViewTextBoxColumn.HeaderText = "RoomNumber";
-            roomNumberDataGridViewTextBoxColumn.Name = "roomNumberDataGridViewTextBoxColumn";
-            roomNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-            typeDataGridViewTextBoxColumn.HeaderText = "Type";
-            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            typeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // HotelName
-            // 
-            HotelName.DataPropertyName = "HotelName";
-            HotelName.HeaderText = "HotelName";
-            HotelName.Name = "HotelName";
-            HotelName.ReadOnly = true;
             // 
             // BookingClass
             // 
@@ -428,7 +448,7 @@
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(label4);
+            Controls.Add(label4Capacity);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(return_image);
@@ -452,6 +472,7 @@
             ((System.ComponentModel.ISupportInitialize)NudPersons).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)roomBindingSource4).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
@@ -476,7 +497,7 @@
         private BindingSource roomBindingSource2;
         private Label label2;
         private Label label3;
-        private Label label4;
+        private Label label4Capacity;
         private Label label5;
         private Label label6;
         private Label label7;
@@ -495,10 +516,12 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private TextBox textBox4;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn Capacity;
+        private DataGridViewTextBoxColumn HotelName;
         private DataGridViewTextBoxColumn roomNumberDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn HotelName;
+        private DataGridViewTextBoxColumn pricePerNightDataGridViewTextBoxColumn;
+        private DataGridViewCheckBoxColumn isAvailableDataGridViewCheckBoxColumn;
+        private BindingSource roomBindingSource4;
     }
 }
