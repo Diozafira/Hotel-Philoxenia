@@ -70,6 +70,7 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             textBox4 = new TextBox();
+            button4CreateReservation = new Button();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -261,7 +262,7 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label9.ForeColor = Color.OrangeRed;
-            label9.Location = new Point(858, 464);
+            label9.Location = new Point(858, 458);
             label9.Name = "label9";
             label9.Size = new Size(110, 30);
             label9.TabIndex = 36;
@@ -416,14 +417,29 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(205, 23);
             textBox3.TabIndex = 47;
+            textBox3.TextChanged += textBox4_TextChanged;
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(805, 497);
+            textBox4.Location = new Point(805, 491);
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
             textBox4.Size = new Size(163, 23);
             textBox4.TabIndex = 48;
+            textBox4.TextChanged += textBox4_TextChanged;
+            // 
+            // button4CreateReservation
+            // 
+            button4CreateReservation.BackColor = Color.LightGray;
+            button4CreateReservation.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            button4CreateReservation.ForeColor = Color.DarkOrchid;
+            button4CreateReservation.Location = new Point(360, 479);
+            button4CreateReservation.Name = "button4CreateReservation";
+            button4CreateReservation.Size = new Size(205, 38);
+            button4CreateReservation.TabIndex = 49;
+            button4CreateReservation.Text = "Create Reservation";
+            button4CreateReservation.UseVisualStyleBackColor = false;
+            button4CreateReservation.Click += button4CreateReservation_Click;
             // 
             // BookingClass
             // 
@@ -431,6 +447,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(992, 530);
+            Controls.Add(button4CreateReservation);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
@@ -523,5 +540,6 @@
         private DataGridViewTextBoxColumn pricePerNightDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn isAvailableDataGridViewCheckBoxColumn;
         private BindingSource roomBindingSource4;
+        private Button button4CreateReservation;
     }
 }

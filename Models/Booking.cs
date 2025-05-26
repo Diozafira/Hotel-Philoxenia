@@ -10,7 +10,6 @@ namespace Hotel_Philoxenia.Models
     {
 
         public int Id { get; set; }
-
         public int CustomerId { get; set; }
         public int RoomId { get; set; }
         public DateTime ReservationDateFrom { get; set; }
@@ -19,8 +18,8 @@ namespace Hotel_Philoxenia.Models
         public DateTime CheckOutDate { get; set; }
         public bool Canceled { get; set; }
         public double ReservationDayPrice { get; set; }
-        public Room Room { get; set; } = new();
-        public Customer Customer { get; set; } = new();
+        public Room Room { get; set; }
+        public Customer Customer { get; set; }
     }
 
 }

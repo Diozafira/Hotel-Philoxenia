@@ -1,11 +1,4 @@
 ﻿using Hotel_Philoxenia.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Hotel_Philoxenia.Forms
 {
@@ -35,9 +28,9 @@ namespace Hotel_Philoxenia.Forms
             //          r.Room.Capacity >= NudPersons.Value
             //    )
             //    .ToList();
-            
+
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -60,12 +53,12 @@ namespace Hotel_Philoxenia.Forms
 
             var customers = _context.Customers
             .Select(c => new
-         {
-             c.Id,
-             FullName = c.LastName + " " + c.SurName 
-         })
+            {
+                c.Id,
+                FullName = c.LastName + " " + c.SurName
+            })
          .ToList();
-           
+
             dataGridView1.DataSource = rooms;
 
             comboBox2.DataSource = rooms;
@@ -75,7 +68,7 @@ namespace Hotel_Philoxenia.Forms
             comboBox1.DataSource = customers;
             comboBox1.ValueMember = "Id";
             comboBox1.DisplayMember = "Fullname";
-            
+
 
         }
 
@@ -83,5 +76,52 @@ namespace Hotel_Philoxenia.Forms
         {
             BringRooms();
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox3.Text, out double costPerDay))
+            {
+                int bookingDuration = 3;
+                // bookingDuration = (DtReservationTo.Value - DtReservationFrom.Value) + int 1;
+                double totalCost = costPerDay * bookingDuration;
+                textBox4.Text = totalCost.ToString("F2");
+            }
+        }
+
+        private void button4CreateReservation_Click(object sender, EventArgs e)
+        {
+            int customerId = (int)comboBox1.SelectedValue;
+            int roomId = (int)comboBox2.SelectedValue;
+            
+
+            DateTime reservationFrom = DtReservationFrom.Value;
+            DateTime reservationTo = DtReservationTo.Value;
+
+            if (!double.TryParse(textBox3.Text, out double reservationDayPrice))
+            {
+                MessageBox.Show("Please enter a valid numeric value for Reservation Day Price.");
+                return;
+            }
+
+            Booking newReservation = new Booking
+            {
+                CustomerId = customerId,
+                RoomId = roomId,
+                ReservationDateFrom = reservationFrom,
+                ReservationDateTo = reservationTo,
+                CheckInDate = reservationFrom,
+                CheckOutDate = reservationTo,
+                Canceled = false,
+                ReservationDayPrice = reservationDayPrice
+                 
+                
+            };
+
+
+            _context.Bookings.Add(newReservation);
+            _context.SaveChanges();
+            MessageBox.Show("Reservation created successfully.");
+        }
     }
 }
+
