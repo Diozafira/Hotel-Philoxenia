@@ -46,7 +46,18 @@
             roomsBindingSource = new BindingSource(components);
             ToolBookingId = new Label();
             button2 = new Button();
+            dateTimePicker2_depart = new DateTimePicker();
+            dateTimePicker_arrival = new DateTimePicker();
+            label10 = new Label();
+            label4 = new Label();
+            textBox_TotalCost = new TextBox();
+            textBox_CostPerDay = new TextBox();
+            label9 = new Label();
+            label7 = new Label();
+            label2 = new Label();
+            textBox_Discount = new TextBox();
             pictureBox3 = new PictureBox();
+            button3_finalConfirmation = new Button();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -68,10 +79,9 @@
             button1.BackColor = Color.Silver;
             button1.ForeColor = Color.Black;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(60, 340);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(69, 453);
             button1.Name = "button1";
-            button1.Size = new Size(100, 52);
+            button1.Size = new Size(114, 69);
             button1.TabIndex = 12;
             button1.Text = "Log Out";
             button1.TextImageRelation = TextImageRelation.TextAboveImage;
@@ -84,11 +94,10 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe Script", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 161);
             textBox1.ForeColor = Color.OrangeRed;
-            textBox1.Location = new Point(0, 458);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Location = new Point(0, 611);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(216, 62);
+            textBox1.Size = new Size(247, 83);
             textBox1.TabIndex = 11;
             textBox1.Text = " Rue Philoxenia, Athens\r\n11257\r\nemail: philoxenia@yahoo.gr\r\ntel.: 210-2233456\r\n";
             textBox1.TextAlign = HorizontalAlignment.Center;
@@ -96,10 +105,9 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(0, 2);
-            pictureBox2.Margin = new Padding(3, 2, 3, 2);
+            pictureBox2.Location = new Point(0, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(224, 46);
+            pictureBox2.Size = new Size(256, 61);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 9;
             pictureBox2.TabStop = false;
@@ -109,9 +117,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label1.ForeColor = Color.OrangeRed;
-            label1.Location = new Point(13, 62);
+            label1.Location = new Point(15, 83);
             label1.Name = "label1";
-            label1.Size = new Size(182, 26);
+            label1.Size = new Size(229, 33);
             label1.TabIndex = 10;
             label1.Text = "Hotel Philoxenia";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -119,10 +127,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-3, 99);
+            pictureBox1.Location = new Point(-3, 132);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(229, 193);
+            pictureBox1.Size = new Size(262, 257);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
@@ -146,11 +154,13 @@
             comboBoxBookingId.DataBindings.Add(new Binding("DataContext", bookingBindingSource, "Id", true));
             comboBoxBookingId.DataBindings.Add(new Binding("SelectedItem", bookingBindingSource, "Id", true));
             comboBoxBookingId.FormattingEnabled = true;
-            comboBoxBookingId.Location = new Point(692, 33);
+            comboBoxBookingId.Location = new Point(535, 100);
+            comboBoxBookingId.Margin = new Padding(3, 4, 3, 4);
             comboBoxBookingId.Name = "comboBoxBookingId";
-            comboBoxBookingId.Size = new Size(119, 23);
+            comboBoxBookingId.Size = new Size(498, 28);
             comboBoxBookingId.TabIndex = 30;
             toolTip1.SetToolTip(comboBoxBookingId, "Select the booking for the receipt");
+            comboBoxBookingId.SelectedIndexChanged += comboBoxBookingId_SelectedIndexChanged;
             // 
             // bookingBindingSource
             // 
@@ -159,13 +169,14 @@
             // return_image
             // 
             return_image.Image = (Image)resources.GetObject("return_image.Image");
-            return_image.Location = new Point(901, 2);
+            return_image.Location = new Point(1030, 3);
+            return_image.Margin = new Padding(3, 4, 3, 4);
             return_image.Name = "return_image";
             return_image.Size = new Size(16, 16);
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;
             return_image.TabIndex = 28;
             return_image.TabStop = false;
-            return_image.Click += this.ReturnToAdminForm_Click;
+            return_image.Click += ReturnToAdminForm_Click;
             // 
             // roomsBindingSource
             // 
@@ -176,41 +187,165 @@
             // 
             ToolBookingId.AutoSize = true;
             ToolBookingId.Font = new Font("Futura Hv BT", 9F, FontStyle.Regular, GraphicsUnit.Point, 161);
-            ToolBookingId.Location = new Point(592, 41);
+            ToolBookingId.Location = new Point(402, 110);
             ToolBookingId.Name = "ToolBookingId";
-            ToolBookingId.Size = new Size(94, 15);
+            ToolBookingId.Size = new Size(127, 18);
             ToolBookingId.TabIndex = 29;
-            ToolBookingId.Text = "Find Booking Id";
+            ToolBookingId.Text = "Find Reservation";
             // 
             // button2
             // 
             button2.BackColor = Color.OrangeRed;
             button2.Font = new Font("Alexandria", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button2.ForeColor = Color.Transparent;
-            button2.Location = new Point(328, 171);
+            button2.Location = new Point(703, 576);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(483, 121);
+            button2.Size = new Size(343, 108);
             button2.TabIndex = 31;
             button2.Text = "Export Invoice to PDF";
+            button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = false;
+            // 
+            // dateTimePicker2_depart
+            // 
+            dateTimePicker2_depart.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker2_depart.Location = new Point(533, 273);
+            dateTimePicker2_depart.Margin = new Padding(3, 4, 3, 4);
+            dateTimePicker2_depart.Name = "dateTimePicker2_depart";
+            dateTimePicker2_depart.Size = new Size(204, 27);
+            dateTimePicker2_depart.TabIndex = 65;
+            // 
+            // dateTimePicker_arrival
+            // 
+            dateTimePicker_arrival.CustomFormat = "dd/MM/yyyy";
+            dateTimePicker_arrival.Location = new Point(533, 212);
+            dateTimePicker_arrival.Margin = new Padding(3, 4, 3, 4);
+            dateTimePicker_arrival.Name = "dateTimePicker_arrival";
+            dateTimePicker_arrival.Size = new Size(204, 27);
+            dateTimePicker_arrival.TabIndex = 64;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label10.ForeColor = Color.FromArgb(0, 192, 192);
+            label10.Location = new Point(601, 243);
+            label10.Name = "label10";
+            label10.Size = new Size(78, 28);
+            label10.TabIndex = 63;
+            label10.Text = "Depart";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label4.ForeColor = Color.FromArgb(0, 192, 192);
+            label4.Location = new Point(603, 180);
+            label4.Name = "label4";
+            label4.Size = new Size(76, 28);
+            label4.TabIndex = 62;
+            label4.Text = "Arrival";
+            // 
+            // textBox_TotalCost
+            // 
+            textBox_TotalCost.Location = new Point(900, 494);
+            textBox_TotalCost.Margin = new Padding(3, 4, 3, 4);
+            textBox_TotalCost.Name = "textBox_TotalCost";
+            textBox_TotalCost.ReadOnly = true;
+            textBox_TotalCost.Size = new Size(133, 27);
+            textBox_TotalCost.TabIndex = 61;
+            // 
+            // textBox_CostPerDay
+            // 
+            textBox_CostPerDay.DataBindings.Add(new Binding("DataContext", roomBindingSource2, "PricePerNight", true));
+            textBox_CostPerDay.Location = new Point(937, 345);
+            textBox_CostPerDay.Margin = new Padding(3, 4, 3, 4);
+            textBox_CostPerDay.Name = "textBox_CostPerDay";
+            textBox_CostPerDay.Size = new Size(96, 27);
+            textBox_CostPerDay.TabIndex = 60;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label9.ForeColor = Color.OrangeRed;
+            label9.Location = new Point(887, 453);
+            label9.Name = "label9";
+            label9.Size = new Size(146, 37);
+            label9.TabIndex = 59;
+            label9.Text = "Total Cost";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label7.ForeColor = Color.FromArgb(0, 192, 192);
+            label7.Location = new Point(900, 313);
+            label7.Name = "label7";
+            label7.Size = new Size(133, 28);
+            label7.TabIndex = 58;
+            label7.Text = "Cost per Day";
+            label7.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            label2.ForeColor = Color.FromArgb(0, 192, 192);
+            label2.Location = new Point(906, 376);
+            label2.Name = "label2";
+            label2.Size = new Size(127, 28);
+            label2.TabIndex = 66;
+            label2.Text = "Discount -%";
+            label2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // textBox_Discount
+            // 
+            textBox_Discount.DataBindings.Add(new Binding("DataContext", roomBindingSource2, "PricePerNight", true));
+            textBox_Discount.Location = new Point(937, 408);
+            textBox_Discount.Margin = new Padding(3, 4, 3, 4);
+            textBox_Discount.Name = "textBox_Discount";
+            textBox_Discount.Size = new Size(96, 27);
+            textBox_Discount.TabIndex = 67;
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(357, 369);
-            pictureBox3.Margin = new Padding(3, 2, 3, 2);
+            pictureBox3.Image = Properties.Resources.customer_checkout;
+            pictureBox3.Location = new Point(402, 212);
             pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(419, 150);
-            pictureBox3.TabIndex = 32;
+            pictureBox3.Size = new Size(106, 88);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 68;
             pictureBox3.TabStop = false;
+            // 
+            // button3_finalConfirmation
+            // 
+            button3_finalConfirmation.Location = new Point(900, 542);
+            button3_finalConfirmation.Name = "button3_finalConfirmation";
+            button3_finalConfirmation.Size = new Size(133, 29);
+            button3_finalConfirmation.TabIndex = 69;
+            button3_finalConfirmation.Text = "Confirm Booking";
+            button3_finalConfirmation.UseVisualStyleBackColor = true;
             // 
             // ToolsClass
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(992, 530);
+            ClientSize = new Size(1134, 707);
+            Controls.Add(button3_finalConfirmation);
             Controls.Add(pictureBox3);
+            Controls.Add(textBox_Discount);
+            Controls.Add(label2);
+            Controls.Add(dateTimePicker2_depart);
+            Controls.Add(dateTimePicker_arrival);
+            Controls.Add(label10);
+            Controls.Add(label4);
+            Controls.Add(textBox_TotalCost);
+            Controls.Add(textBox_CostPerDay);
+            Controls.Add(label9);
+            Controls.Add(label7);
             Controls.Add(button2);
             Controls.Add(comboBoxBookingId);
             Controls.Add(ToolBookingId);
@@ -221,7 +356,6 @@
             Controls.Add(label1);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "ToolsClass";
             Text = "RoomsClass";
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
@@ -260,6 +394,17 @@
         private ComboBox comboBoxBookingId;
         private BindingSource bookingBindingSource;
         private Button button2;
+        private DateTimePicker dateTimePicker2_depart;
+        private DateTimePicker dateTimePicker_arrival;
+        private Label label10;
+        private Label label4;
+        private TextBox textBox_TotalCost;
+        private TextBox textBox_CostPerDay;
+        private Label label9;
+        private Label label7;
+        private Label label2;
+        private TextBox textBox_Discount;
         private PictureBox pictureBox3;
+        private Button button3_finalConfirmation;
     }
 }

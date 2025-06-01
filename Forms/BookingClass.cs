@@ -77,31 +77,17 @@ namespace Hotel_Philoxenia.Forms
             BringRooms();
         }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            if (double.TryParse(textBox3.Text, out double costPerDay))
-            {
-                int bookingDuration = 3;
-                // bookingDuration = (DtReservationTo.Value - DtReservationFrom.Value) + int 1;
-                double totalCost = costPerDay * bookingDuration;
-                textBox4.Text = totalCost.ToString("F2");
-            }
-        }
+
 
         private void button4CreateReservation_Click(object sender, EventArgs e)
         {
             int customerId = (int)comboBox1.SelectedValue;
             int roomId = (int)comboBox2.SelectedValue;
-            
 
             DateTime reservationFrom = DtReservationFrom.Value;
             DateTime reservationTo = DtReservationTo.Value;
-
-            if (!double.TryParse(textBox3.Text, out double reservationDayPrice))
-            {
-                MessageBox.Show("Please enter a valid numeric value for Reservation Day Price.");
-                return;
-            }
+            //DateTime checkInDate = dateTimePicker_arrival.Value;
+            //DateTime checkOutDate = dateTimePicker_depart.Value;
 
             Booking newReservation = new Booking
             {
@@ -109,19 +95,71 @@ namespace Hotel_Philoxenia.Forms
                 RoomId = roomId,
                 ReservationDateFrom = reservationFrom,
                 ReservationDateTo = reservationTo,
-               //CheckInDate = reservationFrom,
-               //CheckOutDate = reservationTo,
-                Canceled = false,
-                ReservationDayPrice = reservationDayPrice
-                 
-                
+                //CheckInDate = checkInDate,              
+                //CheckOutDate = checkOutDate,           
+                ReservationDayPrice = 0,
+                Canceled = false
             };
-
 
             _context.Bookings.Add(newReservation);
             _context.SaveChanges();
             MessageBox.Show("Reservation created successfully.");
         }
+
+
+       
+        
+
+        private void DtReservationFrom_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+
+            if (DtReservationFrom.Value < today)
+            {
+                MessageBox.Show("The reservation day cannot be earlier than today.");
+                DtReservationFrom.Value = today;
+            }
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        { 
+           ChangeFields();
+           textBox2.Location = comboBox1.Location;
+           button3.Location = button2.Location;
+        
+            if (string.IsNullOrEmpty(textBox2.Text.Trim()))
+                ChangeFields();
+
+            var nameArray = textBox2.Text.Trim().Split(' ');
+            if (nameArray.Length == 2)
+            {
+                Models.Customer newCustomer = new Models.Customer()
+                {
+                    SurName = nameArray[0],
+                    LastName = nameArray[1],
+                    Afm = "000000000"
+                };
+                _context.Customers.Add(newCustomer);
+                _context.SaveChanges();
+                comboBox1.DataSource = _context.Customers.ToList();
+                comboBox1.DisplayMember = "FullName";
+                comboBox1.SelectedIndex = -1;
+
+                comboBox1.SelectedValue = newCustomer.Id;
+                ChangeFields();
+            }
+
+        }
+
+        private void ChangeFields()
+        {
+            comboBox1.Visible = !comboBox1.Visible;
+            button2.Visible = !button2.Visible;
+            textBox2.Visible = !textBox2.Visible;
+            button3.Visible = !button3.Visible;
+        }
     }
-}
+    }
+
 
