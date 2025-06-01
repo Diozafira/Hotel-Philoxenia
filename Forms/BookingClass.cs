@@ -109,8 +109,8 @@ namespace Hotel_Philoxenia.Forms
                 RoomId = roomId,
                 ReservationDateFrom = reservationFrom,
                 ReservationDateTo = reservationTo,
-                CheckInDate = reservationFrom,
-                CheckOutDate = reservationTo,
+               //CheckInDate = reservationFrom,
+               //CheckOutDate = reservationTo,
                 Canceled = false,
                 ReservationDayPrice = reservationDayPrice
                  

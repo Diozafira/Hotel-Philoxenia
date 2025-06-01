@@ -53,7 +53,6 @@
             DtReservationFrom = new DateTimePicker();
             DtReservationTo = new DateTimePicker();
             NudPersons = new NumericUpDown();
-            BtnSearchRoom = new Button();
             dataGridView1 = new DataGridView();
             Capacity = new DataGridViewTextBoxColumn();
             HotelName = new DataGridViewTextBoxColumn();
@@ -94,10 +93,9 @@
             button1.BackColor = Color.Silver;
             button1.ForeColor = Color.Black;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(60, 340);
-            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Location = new Point(69, 453);
             button1.Name = "button1";
-            button1.Size = new Size(100, 52);
+            button1.Size = new Size(114, 69);
             button1.TabIndex = 12;
             button1.Text = "Log Out";
             button1.TextImageRelation = TextImageRelation.TextAboveImage;
@@ -110,11 +108,10 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Font = new Font("Segoe Script", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 161);
             textBox1.ForeColor = Color.OrangeRed;
-            textBox1.Location = new Point(0, 458);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
+            textBox1.Location = new Point(0, 611);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(216, 62);
+            textBox1.Size = new Size(247, 83);
             textBox1.TabIndex = 11;
             textBox1.Text = " Rue Philoxenia, Athens\r\n11257\r\nemail: philoxenia@yahoo.gr\r\ntel.: 210-2233456\r\n";
             textBox1.TextAlign = HorizontalAlignment.Center;
@@ -122,10 +119,9 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(0, 2);
-            pictureBox2.Margin = new Padding(3, 2, 3, 2);
+            pictureBox2.Location = new Point(0, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(224, 46);
+            pictureBox2.Size = new Size(256, 61);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 9;
             pictureBox2.TabStop = false;
@@ -135,9 +131,9 @@
             label1.AutoSize = true;
             label1.Font = new Font("Cambria", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label1.ForeColor = Color.OrangeRed;
-            label1.Location = new Point(13, 62);
+            label1.Location = new Point(15, 83);
             label1.Name = "label1";
-            label1.Size = new Size(182, 26);
+            label1.Size = new Size(229, 33);
             label1.TabIndex = 10;
             label1.Text = "Hotel Philoxenia";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -145,10 +141,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-3, 99);
+            pictureBox1.Location = new Point(-3, 132);
             pictureBox1.Margin = new Padding(0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(229, 193);
+            pictureBox1.Size = new Size(262, 257);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 8;
             pictureBox1.TabStop = false;
@@ -168,7 +164,8 @@
             // return_image
             // 
             return_image.Image = (Image)resources.GetObject("return_image.Image");
-            return_image.Location = new Point(901, 2);
+            return_image.Location = new Point(1030, 3);
+            return_image.Margin = new Padding(3, 4, 3, 4);
             return_image.Name = "return_image";
             return_image.Size = new Size(16, 16);
             return_image.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -186,9 +183,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label2.ForeColor = Color.FromArgb(0, 192, 192);
-            label2.Location = new Point(248, 67);
+            label2.Location = new Point(272, 86);
             label2.Name = "label2";
-            label2.Size = new Size(87, 21);
+            label2.Size = new Size(109, 28);
             label2.TabIndex = 29;
             label2.Text = "Date from";
             // 
@@ -197,9 +194,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label3.ForeColor = Color.FromArgb(0, 192, 192);
-            label3.Location = new Point(608, 66);
+            label3.Location = new Point(692, 86);
             label3.Name = "label3";
-            label3.Size = new Size(66, 21);
+            label3.Size = new Size(83, 28);
             label3.TabIndex = 30;
             label3.Text = "Date to";
             // 
@@ -208,9 +205,9 @@
             label4Capacity.AutoSize = true;
             label4Capacity.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label4Capacity.ForeColor = Color.FromArgb(0, 192, 192);
-            label4Capacity.Location = new Point(248, 140);
+            label4Capacity.Location = new Point(272, 186);
             label4Capacity.Name = "label4Capacity";
-            label4Capacity.Size = new Size(76, 21);
+            label4Capacity.Size = new Size(93, 28);
             label4Capacity.TabIndex = 31;
             label4Capacity.Text = "Capacity";
             // 
@@ -219,9 +216,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label5.ForeColor = Color.FromArgb(0, 192, 192);
-            label5.Location = new Point(248, 338);
+            label5.Location = new Point(272, 449);
             label5.Name = "label5";
-            label5.Size = new Size(83, 21);
+            label5.Size = new Size(102, 28);
             label5.TabIndex = 32;
             label5.Text = "Customer";
             // 
@@ -230,9 +227,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label6.ForeColor = Color.FromArgb(0, 192, 192);
-            label6.Location = new Point(248, 398);
+            label6.Location = new Point(272, 528);
             label6.Name = "label6";
-            label6.Size = new Size(55, 21);
+            label6.Size = new Size(67, 28);
             label6.TabIndex = 33;
             label6.Text = "Room";
             // 
@@ -241,9 +238,9 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label7.ForeColor = Color.FromArgb(0, 192, 192);
-            label7.Location = new Point(248, 452);
+            label7.Location = new Point(272, 602);
             label7.Name = "label7";
-            label7.Size = new Size(106, 21);
+            label7.Size = new Size(133, 28);
             label7.TabIndex = 34;
             label7.Text = "Cost per Day";
             label7.TextAlign = ContentAlignment.MiddleLeft;
@@ -251,9 +248,9 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(186, 33);
+            label8.Location = new Point(213, 44);
             label8.Name = "label8";
-            label8.Size = new Size(38, 15);
+            label8.Size = new Size(50, 20);
             label8.TabIndex = 35;
             label8.Text = "label8";
             // 
@@ -262,44 +259,38 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label9.ForeColor = Color.OrangeRed;
-            label9.Location = new Point(858, 458);
+            label9.Location = new Point(960, 611);
             label9.Name = "label9";
-            label9.Size = new Size(110, 30);
+            label9.Size = new Size(146, 37);
             label9.TabIndex = 36;
             label9.Text = "Total Cost";
             // 
             // DtReservationFrom
             // 
             DtReservationFrom.CustomFormat = "dd/MM/yyyy";
-            DtReservationFrom.Location = new Point(360, 62);
+            DtReservationFrom.Location = new Point(411, 89);
+            DtReservationFrom.Margin = new Padding(3, 4, 3, 4);
             DtReservationFrom.Name = "DtReservationFrom";
-            DtReservationFrom.Size = new Size(211, 23);
+            DtReservationFrom.Size = new Size(204, 27);
             DtReservationFrom.TabIndex = 37;
             // 
             // DtReservationTo
             // 
             DtReservationTo.CustomFormat = "dd/MM/yyyy";
-            DtReservationTo.Location = new Point(680, 62);
+            DtReservationTo.Location = new Point(802, 89);
+            DtReservationTo.Margin = new Padding(3, 4, 3, 4);
             DtReservationTo.Name = "DtReservationTo";
-            DtReservationTo.Size = new Size(200, 23);
+            DtReservationTo.Size = new Size(204, 27);
             DtReservationTo.TabIndex = 38;
             // 
             // NudPersons
             // 
-            NudPersons.Location = new Point(360, 143);
+            NudPersons.Location = new Point(411, 191);
+            NudPersons.Margin = new Padding(3, 4, 3, 4);
             NudPersons.Name = "NudPersons";
-            NudPersons.Size = new Size(61, 23);
+            NudPersons.Size = new Size(70, 27);
             NudPersons.TabIndex = 39;
             NudPersons.ValueChanged += NudPersons_ValueChanged;
-            // 
-            // BtnSearchRoom
-            // 
-            BtnSearchRoom.Location = new Point(427, 143);
-            BtnSearchRoom.Name = "BtnSearchRoom";
-            BtnSearchRoom.Size = new Size(143, 23);
-            BtnSearchRoom.TabIndex = 40;
-            BtnSearchRoom.Text = "Search";
-            BtnSearchRoom.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -310,53 +301,67 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Capacity, HotelName, roomNumberDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, pricePerNightDataGridViewTextBoxColumn, isAvailableDataGridViewCheckBoxColumn });
             dataGridView1.DataSource = roomBindingSource2;
             dataGridView1.GridColor = SystemColors.InactiveCaption;
-            dataGridView1.Location = new Point(360, 172);
+            dataGridView1.Location = new Point(411, 229);
+            dataGridView1.Margin = new Padding(3, 4, 3, 4);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
-            dataGridView1.Size = new Size(520, 134);
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(594, 179);
             dataGridView1.TabIndex = 41;
             // 
             // Capacity
             // 
             Capacity.DataPropertyName = "Capacity";
             Capacity.HeaderText = "Capacity";
+            Capacity.MinimumWidth = 6;
             Capacity.Name = "Capacity";
             Capacity.ReadOnly = true;
+            Capacity.Width = 125;
             // 
             // HotelName
             // 
             HotelName.DataPropertyName = "HotelName";
             HotelName.HeaderText = "HotelName";
+            HotelName.MinimumWidth = 6;
             HotelName.Name = "HotelName";
             HotelName.ReadOnly = true;
+            HotelName.Width = 125;
             // 
             // roomNumberDataGridViewTextBoxColumn
             // 
             roomNumberDataGridViewTextBoxColumn.DataPropertyName = "RoomNumber";
             roomNumberDataGridViewTextBoxColumn.HeaderText = "RoomNumber";
+            roomNumberDataGridViewTextBoxColumn.MinimumWidth = 6;
             roomNumberDataGridViewTextBoxColumn.Name = "roomNumberDataGridViewTextBoxColumn";
             roomNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            roomNumberDataGridViewTextBoxColumn.Width = 125;
             // 
             // typeDataGridViewTextBoxColumn
             // 
             typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
             typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            typeDataGridViewTextBoxColumn.MinimumWidth = 6;
             typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
             typeDataGridViewTextBoxColumn.ReadOnly = true;
+            typeDataGridViewTextBoxColumn.Width = 125;
             // 
             // pricePerNightDataGridViewTextBoxColumn
             // 
             pricePerNightDataGridViewTextBoxColumn.DataPropertyName = "PricePerNight";
             pricePerNightDataGridViewTextBoxColumn.HeaderText = "PricePerNight";
+            pricePerNightDataGridViewTextBoxColumn.MinimumWidth = 6;
             pricePerNightDataGridViewTextBoxColumn.Name = "pricePerNightDataGridViewTextBoxColumn";
             pricePerNightDataGridViewTextBoxColumn.ReadOnly = true;
+            pricePerNightDataGridViewTextBoxColumn.Width = 125;
             // 
             // isAvailableDataGridViewCheckBoxColumn
             // 
             isAvailableDataGridViewCheckBoxColumn.DataPropertyName = "IsAvailable";
             isAvailableDataGridViewCheckBoxColumn.HeaderText = "IsAvailable";
+            isAvailableDataGridViewCheckBoxColumn.MinimumWidth = 6;
             isAvailableDataGridViewCheckBoxColumn.Name = "isAvailableDataGridViewCheckBoxColumn";
             isAvailableDataGridViewCheckBoxColumn.ReadOnly = true;
+            isAvailableDataGridViewCheckBoxColumn.Width = 125;
             // 
             // roomBindingSource3
             // 
@@ -364,18 +369,20 @@
             // 
             // button2
             // 
-            button2.Location = new Point(805, 338);
+            button2.Location = new Point(920, 451);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(75, 23);
+            button2.Size = new Size(86, 31);
             button2.TabIndex = 42;
             button2.Text = "Select";
             button2.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            button3.Location = new Point(805, 367);
+            button3.Location = new Point(920, 489);
+            button3.Margin = new Padding(3, 4, 3, 4);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(86, 31);
             button3.TabIndex = 43;
             button3.Text = "Add New";
             button3.UseVisualStyleBackColor = true;
@@ -383,9 +390,10 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(360, 338);
+            comboBox1.Location = new Point(411, 451);
+            comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(423, 23);
+            comboBox1.Size = new Size(483, 28);
             comboBox1.TabIndex = 44;
             // 
             // comboBox2
@@ -393,9 +401,10 @@
             comboBox2.DataSource = roomBindingSource2;
             comboBox2.DisplayMember = "RoomNumber";
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(360, 396);
+            comboBox2.Location = new Point(411, 528);
+            comboBox2.Margin = new Padding(3, 4, 3, 4);
             comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(205, 23);
+            comboBox2.Size = new Size(234, 28);
             comboBox2.TabIndex = 45;
             comboBox2.ValueMember = "Id";
             // 
@@ -405,26 +414,29 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(360, 367);
+            textBox2.Location = new Point(411, 489);
+            textBox2.Margin = new Padding(3, 4, 3, 4);
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(421, 23);
+            textBox2.Size = new Size(481, 27);
             textBox2.TabIndex = 46;
             // 
             // textBox3
             // 
             textBox3.DataBindings.Add(new Binding("DataContext", roomBindingSource2, "PricePerNight", true));
-            textBox3.Location = new Point(360, 450);
+            textBox3.Location = new Point(411, 600);
+            textBox3.Margin = new Padding(3, 4, 3, 4);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(205, 23);
+            textBox3.Size = new Size(234, 27);
             textBox3.TabIndex = 47;
             textBox3.TextChanged += textBox4_TextChanged;
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(805, 491);
+            textBox4.Location = new Point(920, 655);
+            textBox4.Margin = new Padding(3, 4, 3, 4);
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
-            textBox4.Size = new Size(163, 23);
+            textBox4.Size = new Size(186, 27);
             textBox4.TabIndex = 48;
             textBox4.TextChanged += textBox4_TextChanged;
             // 
@@ -433,9 +445,10 @@
             button4CreateReservation.BackColor = Color.LightGray;
             button4CreateReservation.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             button4CreateReservation.ForeColor = Color.DarkOrchid;
-            button4CreateReservation.Location = new Point(360, 479);
+            button4CreateReservation.Location = new Point(411, 639);
+            button4CreateReservation.Margin = new Padding(3, 4, 3, 4);
             button4CreateReservation.Name = "button4CreateReservation";
-            button4CreateReservation.Size = new Size(205, 38);
+            button4CreateReservation.Size = new Size(234, 51);
             button4CreateReservation.TabIndex = 49;
             button4CreateReservation.Text = "Create Reservation";
             button4CreateReservation.UseVisualStyleBackColor = false;
@@ -443,10 +456,10 @@
             // 
             // BookingClass
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(992, 530);
+            ClientSize = new Size(1134, 707);
             Controls.Add(button4CreateReservation);
             Controls.Add(textBox4);
             Controls.Add(textBox3);
@@ -456,7 +469,6 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(dataGridView1);
-            Controls.Add(BtnSearchRoom);
             Controls.Add(NudPersons);
             Controls.Add(DtReservationTo);
             Controls.Add(DtReservationFrom);
@@ -475,7 +487,6 @@
             Controls.Add(label1);
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(3, 2, 3, 2);
             Name = "BookingClass";
             Text = "RoomsClass";
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).EndInit();
@@ -523,7 +534,6 @@
         private DateTimePicker DtReservationFrom;
         private DateTimePicker DtReservationTo;
         private NumericUpDown NudPersons;
-        private Button BtnSearchRoom;
         private DataGridView dataGridView1;
         private BindingSource roomBindingSource3;
         private Button button2;

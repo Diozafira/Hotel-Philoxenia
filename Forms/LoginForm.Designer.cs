@@ -159,8 +159,6 @@ namespace Hotel_Philoxenia.Forms
             // loginShowPassBtn
             // 
             loginShowPassBtn.AutoSize = true;
-            loginShowPassBtn.Checked = true;
-            loginShowPassBtn.CheckState = CheckState.Indeterminate;
             loginShowPassBtn.Font = new Font("Cambria", 7.8F, FontStyle.Italic, GraphicsUnit.Point, 161);
             loginShowPassBtn.Location = new Point(573, 283);
             loginShowPassBtn.Name = "loginShowPassBtn";
