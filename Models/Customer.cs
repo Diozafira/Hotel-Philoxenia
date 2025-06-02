@@ -15,6 +15,8 @@ namespace Hotel_Philoxenia.Models
         public string Afm { get; set; } = string.Empty;
         public string Telephone { get; set; } = string.Empty;
 
+        public string FullName => $"{LastName} {SurName}";
+
         public List<Booking> Bookings { get; set; }
     }
 

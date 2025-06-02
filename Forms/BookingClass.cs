@@ -1,10 +1,15 @@
 ﻿using Hotel_Philoxenia.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Hotel_Philoxenia.Forms
 {
     public partial class BookingClass : Form
     {
         private readonly HotelContext _context;
+        private bool isAddingCustomer = false;
 
         public BookingClass()
         {
@@ -12,23 +17,34 @@ namespace Hotel_Philoxenia.Forms
             _context = new HotelContext();
         }
 
-
-
-        private void BtnSearchRoom_Click(object sender, EventArgs e)
+        private void SearchRoom_Click(object sender, EventArgs e)
         {
             int numberOfPersons = (int)NudPersons.Value;
+            var reservationFrom = DtReservationFrom.Value.Date;
+            var reservationTo = DtReservationTo.Value.Date;
 
-            ////var availableBookings = _context.Bookings
-            //    .Include(b => b.Room)
-            //    .Where(r =>
-            //        ((r.ReservationDateFrom >= DtReservationFrom.Value &&
-            //          r.ReservationDateFrom <= DtReservationTo.Value) ||
-            //         (r.ReservationDateTo >= DtReservationFrom.Value &&
-            //          r.ReservationDateTo <= DtReservationTo.Value)) &&
-            //          r.Room.Capacity >= NudPersons.Value
-            //    )
-            //    .ToList();
+            if (reservationTo <= reservationFrom)
+            {
+                MessageBox.Show("Reservation end date must be after start date.");
+                return;
+            }
 
+            var availableRooms = _context.Rooms
+                .Where(r => r.Capacity >= numberOfPersons &&
+                            !_context.Bookings.Any(b =>
+                                b.RoomId == r.Id &&
+                                b.ReservationDateFrom < reservationTo &&
+                                b.ReservationDateTo > reservationFrom &&
+                                !b.Canceled))
+                .ToList();
+
+            MessageBox.Show($"Found {availableRooms.Count} available room(s).");
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = availableRooms;
+
+            if (dataGridView1.Columns.Contains("Bookings"))
+                dataGridView1.Columns["Bookings"].Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,25 +67,16 @@ namespace Hotel_Philoxenia.Forms
                 .Where(r => r.Capacity >= selectedCapacity)
                 .ToList();
 
-            var customers = _context.Customers
-            .Select(c => new
-            {
-                c.Id,
-                FullName = c.LastName + " " + c.SurName
-            })
-         .ToList();
-
             dataGridView1.DataSource = rooms;
 
             comboBox2.DataSource = rooms;
             comboBox2.ValueMember = "Id";
             comboBox2.DisplayMember = "RoomNumber";
 
+            var customers = _context.Customers.ToList();
             comboBox1.DataSource = customers;
             comboBox1.ValueMember = "Id";
-            comboBox1.DisplayMember = "Fullname";
-
-
+            comboBox1.DisplayMember = "FullName";
         }
 
         private void NudPersons_ValueChanged(object sender, EventArgs e)
@@ -77,38 +84,66 @@ namespace Hotel_Philoxenia.Forms
             BringRooms();
         }
 
-
-
         private void button4CreateReservation_Click(object sender, EventArgs e)
         {
+            if (comboBox1.SelectedValue == null || comboBox2.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a customer and a room.");
+                return;
+            }
+
             int customerId = (int)comboBox1.SelectedValue;
             int roomId = (int)comboBox2.SelectedValue;
 
             DateTime reservationFrom = DtReservationFrom.Value;
             DateTime reservationTo = DtReservationTo.Value;
-            //DateTime checkInDate = dateTimePicker_arrival.Value;
-            //DateTime checkOutDate = dateTimePicker_depart.Value;
 
-            Booking newReservation = new Booking
+            if (reservationTo <= reservationFrom)
+            {
+                MessageBox.Show("Reservation end date must be after start date.");
+                return;
+            }
+
+            var room = _context.Rooms.FirstOrDefault(r => r.Id == roomId);
+            if (room == null)
+            {
+                MessageBox.Show("Selected room not found.");
+                return;
+            }
+
+            int days = (reservationTo - reservationFrom).Days;
+            if (days <= 0)
+            {
+                MessageBox.Show("Reservation must be at least 1 day.");
+                return;
+            }
+
+            decimal price = room.PricePerNight * days;
+
+            var newReservation = new Booking
             {
                 CustomerId = customerId,
                 RoomId = roomId,
                 ReservationDateFrom = reservationFrom,
                 ReservationDateTo = reservationTo,
-                //CheckInDate = checkInDate,              
-                //CheckOutDate = checkOutDate,           
-                ReservationDayPrice = 0,
+                CheckInDate = reservationFrom,
+                CheckOutDate = reservationTo,
+                ReservationDayPrice = (double)price,
                 Canceled = false
             };
 
             _context.Bookings.Add(newReservation);
-            _context.SaveChanges();
-            MessageBox.Show("Reservation created successfully.");
+            try
+            {
+                _context.SaveChanges();
+                MessageBox.Show("Reservation created successfully.");
+                LoadBookings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
         }
-
-
-       
-        
 
         private void DtReservationFrom_ValueChanged(object sender, EventArgs e)
         {
@@ -119,47 +154,82 @@ namespace Hotel_Philoxenia.Forms
                 MessageBox.Show("The reservation day cannot be earlier than today.");
                 DtReservationFrom.Value = today;
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
-        { 
-           ChangeFields();
-           textBox2.Location = comboBox1.Location;
-           button3.Location = button2.Location;
-        
-            if (string.IsNullOrEmpty(textBox2.Text.Trim()))
-                ChangeFields();
-
-            var nameArray = textBox2.Text.Trim().Split(' ');
-            if (nameArray.Length == 2)
+        {
+            if (!isAddingCustomer)
             {
-                Models.Customer newCustomer = new Models.Customer()
-                {
-                    SurName = nameArray[0],
-                    LastName = nameArray[1],
-                    Afm = "000000000"
-                };
-                _context.Customers.Add(newCustomer);
-                _context.SaveChanges();
-                comboBox1.DataSource = _context.Customers.ToList();
-                comboBox1.DisplayMember = "FullName";
-                comboBox1.SelectedIndex = -1;
-
-                comboBox1.SelectedValue = newCustomer.Id;
-                ChangeFields();
+                textBox2.Clear();
+                textBox2.Location = comboBox1.Location;
+                button3.Location = button2.Location;
+                ToggleAddCustomerFields(true);
+                textBox2.Focus();
+                return;
             }
 
+            string fullNameInput = textBox2.Text.Trim();
+            if (string.IsNullOrWhiteSpace(fullNameInput))
+            {
+                MessageBox.Show("Please enter a full name.");
+                return;
+            }
+
+            var nameArray = fullNameInput.Split(' ');
+            if (nameArray.Length != 2)
+            {
+                MessageBox.Show("Use format: Lastname Surname.");
+                return;
+            }
+
+            string lastName = nameArray[0];
+            string surName = nameArray[1];
+
+            var newCustomer = new Customer
+            {
+                SurName = surName,
+                LastName = lastName,
+                Afm = "000000000"
+            };
+
+            _context.Customers.Add(newCustomer);
+            _context.SaveChanges();
+
+            var customers = _context.Customers.ToList();
+            comboBox1.DataSource = customers;
+            comboBox1.DisplayMember = "FullName";
+            comboBox1.ValueMember = "Id";
+            comboBox1.SelectedValue = newCustomer.Id;
+
+            ToggleAddCustomerFields(false);
         }
 
-        private void ChangeFields()
+        private void ToggleAddCustomerFields(bool enable)
         {
-            comboBox1.Visible = !comboBox1.Visible;
-            button2.Visible = !button2.Visible;
-            textBox2.Visible = !textBox2.Visible;
-            button3.Visible = !button3.Visible;
+            isAddingCustomer = enable;
+            comboBox1.Visible = !enable;
+            button2.Visible = !enable;
+            textBox2.Visible = enable;
+            button3.Text = enable ? "Save New Customer" : "Add New Customer";
+        }
+
+        private void LoadBookings()
+        {
+            var bookings = _context.Bookings
+                .Include(b => b.Customer)
+                .Include(b => b.Room)
+                .Select(b => new
+                {
+                    b.Id,
+                    Customer = b.Customer.FullName,
+                    Room = b.Room.RoomNumber,
+                    From = b.ReservationDateFrom,
+                    To = b.ReservationDateTo,
+                    b.Canceled,
+                    b.ReservationDayPrice
+                }).ToList();
+
+            dataGridView1.DataSource = bookings;
         }
     }
-    }
-
-
+}

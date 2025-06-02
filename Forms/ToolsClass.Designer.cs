@@ -58,6 +58,7 @@
             textBox_Discount = new TextBox();
             pictureBox3 = new PictureBox();
             button3_finalConfirmation = new Button();
+            cancel_rsv_button = new Button();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -215,6 +216,7 @@
             dateTimePicker2_depart.Name = "dateTimePicker2_depart";
             dateTimePicker2_depart.Size = new Size(204, 27);
             dateTimePicker2_depart.TabIndex = 65;
+            dateTimePicker2_depart.ValueChanged += dateTimePicker2_depart_ValueChanged;
             // 
             // dateTimePicker_arrival
             // 
@@ -224,6 +226,7 @@
             dateTimePicker_arrival.Name = "dateTimePicker_arrival";
             dateTimePicker_arrival.Size = new Size(204, 27);
             dateTimePicker_arrival.TabIndex = 64;
+            dateTimePicker_arrival.ValueChanged += dateTimePicker_arrival_ValueChanged;
             // 
             // label10
             // 
@@ -308,6 +311,7 @@
             textBox_Discount.Name = "textBox_Discount";
             textBox_Discount.Size = new Size(96, 27);
             textBox_Discount.TabIndex = 67;
+            //textBox_Discount.TextChanged += textBox_Discount_TextChanged_1;
             // 
             // pictureBox3
             // 
@@ -321,12 +325,26 @@
             // 
             // button3_finalConfirmation
             // 
-            button3_finalConfirmation.Location = new Point(900, 542);
+            button3_finalConfirmation.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 161);
+            button3_finalConfirmation.ForeColor = Color.Green;
+            button3_finalConfirmation.Location = new Point(900, 528);
             button3_finalConfirmation.Name = "button3_finalConfirmation";
-            button3_finalConfirmation.Size = new Size(133, 29);
+            button3_finalConfirmation.Size = new Size(133, 43);
             button3_finalConfirmation.TabIndex = 69;
-            button3_finalConfirmation.Text = "Confirm Booking";
+            button3_finalConfirmation.Text = "Confirm";
             button3_finalConfirmation.UseVisualStyleBackColor = true;
+            button3_finalConfirmation.Click += button3_finalConfirmation_Click;
+            // 
+            // cancel_rsv_button
+            // 
+            cancel_rsv_button.ForeColor = Color.Red;
+            cancel_rsv_button.Location = new Point(558, 343);
+            cancel_rsv_button.Name = "cancel_rsv_button";
+            cancel_rsv_button.Size = new Size(133, 29);
+            cancel_rsv_button.TabIndex = 70;
+            cancel_rsv_button.Text = "Cancel Booking";
+            cancel_rsv_button.UseVisualStyleBackColor = true;
+            cancel_rsv_button.Click += cancel_rsv_button_Click;
             // 
             // ToolsClass
             // 
@@ -334,6 +352,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1134, 707);
+            Controls.Add(cancel_rsv_button);
             Controls.Add(button3_finalConfirmation);
             Controls.Add(pictureBox3);
             Controls.Add(textBox_Discount);
@@ -406,5 +425,6 @@
         private TextBox textBox_Discount;
         private PictureBox pictureBox3;
         private Button button3_finalConfirmation;
+        private Button cancel_rsv_button;
     }
 }

@@ -362,7 +362,7 @@
             button3.TabIndex = 43;
             button3.Text = "Add New";
             button3.UseVisualStyleBackColor = true;
-            //button3.Click += button3_Click;
+            button3.Click += button3_Click;
             // 
             // comboBox1
             // 

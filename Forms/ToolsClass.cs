@@ -92,9 +92,7 @@ namespace Hotel_Philoxenia
                     }
 
                     double baseCost = costPerDay * bookingDuration;
-                    double discountAmount = baseCost * (discountPercent / 100);
-                    double totalCost = baseCost - discountAmount;
-
+                    double totalCost = ApplyDiscount(baseCost, discountPercent);
                     textBox_TotalCost.Text = totalCost.ToString("F2");
                 }
                 else
@@ -155,13 +153,84 @@ namespace Hotel_Philoxenia
                         textBox_Discount.Text = "0";
                     }
                     UpdateTotalCost();
+                    
+
 
                 }
             }
         }
 
-       
+        private void cancel_rsv_button_Click(object sender, EventArgs e)
+        {
+            if (comboBoxBookingId.SelectedValue == null)
+            {
+                MessageBox.Show("Please select a booking to cancel.");
+                return;
+            }
+
+            int bookingId = (int)comboBoxBookingId.SelectedValue;
+            var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+
+            if (booking == null)
+            {
+                MessageBox.Show("Booking not found.");
+                return;
+            }
+
+            booking.Canceled = true;
+            _context.SaveChanges();
+            MessageBox.Show("Reservation canceled successfully.");
+            LoadValidBookings();
+
+        }
+
+        private void button3_finalConfirmation_Click(object sender, EventArgs e)
+
+        {
+            if (comboBoxBookingId.SelectedValue is int bookingId)
+            {
+                var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+                if (booking != null)
+                {
+                    DateTime arrival = dateTimePicker_arrival.Value;
+                    DateTime depart = dateTimePicker2_depart.Value;
+
+                    if (depart <= arrival)
+                    {
+                        MessageBox.Show("Departure must be after arrival.");
+                        return;
+                    }
+
+                    booking.CheckInDate = arrival;
+                    booking.CheckOutDate = depart;
+
+                    if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay))
+                    {
+                        int duration = (int)(depart - arrival).TotalDays;
+                        booking.ReservationDayPrice = costPerDay * duration;
+                    }
+
+                    _context.SaveChanges();
+                    MessageBox.Show("Booking updated successfully.");
+                    LoadValidBookings();
+                }
+                else
+                {
+                    MessageBox.Show("Booking not found.");
+                }
+            }
+        }
+
+        private double ApplyDiscount(double basePrice, double discountPercent)
+        {
+           
+
+            return basePrice - (basePrice * (discountPercent / 100));
+        }
+
     }
 }
+
+
 
     
