@@ -2,10 +2,8 @@
 using Hotel_Philoxenia.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Hotel_Philoxenia
 {
@@ -13,32 +11,21 @@ namespace Hotel_Philoxenia
     {
         private readonly HotelContext _context;
 
-
-
-
         public ToolsClass()
         {
             InitializeComponent();
             _context = new HotelContext();
             LoadValidBookings();
             UpdateTotalCost();
-
-
-
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        private void button_Exit_Click(object sender, EventArgs e) => Application.Exit();
 
         private void ReturnToAdminForm_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AdminMainForm adminMainForm = new AdminMainForm();
-            adminMainForm.Show();
+            new AdminMainForm().Show();
         }
-
 
         private void textBox_CostPerDay_TextChanged(object sender, EventArgs e) => UpdateTotalCost();
         private void textBox_Discount_TextChanged(object sender, EventArgs e) => UpdateTotalCost();
@@ -54,7 +41,7 @@ namespace Hotel_Philoxenia
                 .Select(b => new
                 {
                     b.Id,
-                    Display = $"#{b.Id} - {b.Customer.SurName} in Room {b.Room.RoomNumber}"
+                    Display = $"#{b.Id} - {b.Customer.FullName} in Room {b.Room.RoomNumber}"
                 })
                 .ToList();
 
@@ -63,72 +50,75 @@ namespace Hotel_Philoxenia
             comboBoxBookingId.ValueMember = "Id";
         }
 
-
-
-
-
-
-
         private void UpdateTotalCost()
         {
-            if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay) &&
-                DateTime.TryParse(dateTimePicker_arrival.Text, out DateTime fromDate) &&
-                DateTime.TryParse(dateTimePicker2_depart.Text, out DateTime toDate))
+            double costPerDay;
+            DateTime fromDate = dateTimePicker_arrival.Value;
+            DateTime toDate = dateTimePicker2_depart.Value;
+
+            if (!double.TryParse(textBox_CostPerDay.Text, out costPerDay))
             {
-                int bookingDuration = (int)(toDate - fromDate).TotalDays;
+                textBox_TotalCost.Text = "Invalid input";
+                return;
+            }
 
-                if (bookingDuration <= 0)
-                {
-                    textBox_TotalCost.Text = "Invalid stay duration";
-                    return;
-                }
+            int bookingDuration = (int)(toDate - fromDate).TotalDays;
+            if (bookingDuration <= 0)
+            {
+                textBox_TotalCost.Text = "Please check the dates";
+                return;
+            }
 
-                if (double.TryParse(textBox_Discount.Text, out double discountPercent))
-                {
-                    if (discountPercent < 0 || discountPercent > 100)
-                    {
-                        textBox_TotalCost.Text = "Discount must be 0–100%";
-                        return;
-                    }
-
-                    double baseCost = costPerDay * bookingDuration;
-                    double totalCost = ApplyDiscount(baseCost, discountPercent);
-                    textBox_TotalCost.Text = totalCost.ToString("F2");
-                }
-                else
-                {
-                    textBox_TotalCost.Text = "Invalid discount";
-                }
+            if (TryGetDiscount(out double discountPercent))
+            {
+                double baseCost = costPerDay * bookingDuration;
+                double totalCost = ApplyDiscount(baseCost, discountPercent);
+                textBox_TotalCost.Text = totalCost.ToString("F2");
             }
             else
             {
-                textBox_TotalCost.Text = "Invalid input";
+                textBox_TotalCost.Text = "Invalid discount";
             }
         }
 
+        private bool TryGetDiscount(out double discountPercent)
+        {
+            if (double.TryParse(textBox_Discount.Text, out discountPercent) &&
+                discountPercent >= 0 && discountPercent <= 100)
+            {
+                return true;
+            }
 
+            discountPercent = 0;
+            return false;
+        }
+
+        private double ApplyDiscount(double basePrice, double discountPercent)
+        {
+            return basePrice - (basePrice * (discountPercent / 100));
+        }
 
         private void button_UpdateBooking_Click(object sender, EventArgs e)
         {
-            if (comboBoxBookingId.SelectedValue is int bookingId) // ✔️ Get selected booking
+            if (comboBoxBookingId.SelectedValue is int bookingId)
             {
-                var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId); // ✔️ Fetch booking from DB
+                var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
                 if (booking != null)
                 {
-                    booking.CheckInDate = dateTimePicker_arrival.Value; // ✔️ Update check-in
-                    booking.CheckOutDate = dateTimePicker2_depart.Value; // ✔️ Update check-out
+                    booking.CheckInDate = dateTimePicker_arrival.Value;
+                    booking.CheckOutDate = dateTimePicker2_depart.Value;
 
                     if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay))
                     {
-                        booking.ReservationDayPrice = costPerDay; // ✔️ Update cost if valid
+                        booking.ReservationDayPrice = costPerDay;
                     }
 
-                    _context.SaveChanges(); // ✔️ Save changes to DB
+                    _context.SaveChanges();
                     MessageBox.Show("Booking updated successfully.");
                 }
                 else
                 {
-                    MessageBox.Show("Booking not found."); // ❌ Could happen if invalid ID
+                    MessageBox.Show("Booking not found.");
                 }
             }
         }
@@ -140,22 +130,14 @@ namespace Hotel_Philoxenia
                 var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
                 if (booking != null)
                 {
-                    // Set reservation dates in date pickers
                     dateTimePicker_arrival.Value = booking.ReservationDateFrom;
                     dateTimePicker2_depart.Value = booking.ReservationDateTo;
-
-                    // Set price per day
                     textBox_CostPerDay.Text = booking.ReservationDayPrice.ToString("F2");
 
-                    // Optional: pre-fill discount if stored, or default to 0
                     if (string.IsNullOrWhiteSpace(textBox_Discount.Text))
-                    {
                         textBox_Discount.Text = "0";
-                    }
+
                     UpdateTotalCost();
-                    
-
-
                 }
             }
         }
@@ -180,12 +162,12 @@ namespace Hotel_Philoxenia
             booking.Canceled = true;
             _context.SaveChanges();
             MessageBox.Show("Reservation canceled successfully.");
-            LoadValidBookings();
 
+            LoadValidBookings();
+            ClearInputs();
         }
 
-        private void button3_finalConfirmation_Click(object sender, EventArgs e)
-
+        private void button_FinalizeUpdate_Click(object sender, EventArgs e)
         {
             if (comboBoxBookingId.SelectedValue is int bookingId)
             {
@@ -204,12 +186,14 @@ namespace Hotel_Philoxenia
                     booking.CheckInDate = arrival;
                     booking.CheckOutDate = depart;
 
-                    if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay))
+                    if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay) &&
+                        TryGetDiscount(out double discountPercent))
                     {
                         int duration = (int)(depart - arrival).TotalDays;
-                        booking.ReservationDayPrice = costPerDay * duration;
+                        double basePrice = costPerDay * duration;
+                        booking.ReservationDayPrice = ApplyDiscount(costPerDay, discountPercent);
                     }
-
+                    UpdateTotalCost();
                     _context.SaveChanges();
                     MessageBox.Show("Booking updated successfully.");
                     LoadValidBookings();
@@ -221,16 +205,13 @@ namespace Hotel_Philoxenia
             }
         }
 
-        private double ApplyDiscount(double basePrice, double discountPercent)
+        private void ClearInputs()
         {
-           
-
-            return basePrice - (basePrice * (discountPercent / 100));
+            textBox_CostPerDay.Text = "";
+            textBox_Discount.Text = "0";
+            textBox_TotalCost.Text = "";
+            dateTimePicker_arrival.Value = DateTime.Today;
+            dateTimePicker2_depart.Value = DateTime.Today.AddDays(1);
         }
-
     }
 }
-
-
-
-    

@@ -87,7 +87,7 @@
             button1.Text = "Log Out";
             button1.TextImageRelation = TextImageRelation.TextAboveImage;
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            //button1.Click += button1_Click;
             // 
             // textBox1
             // 
@@ -333,7 +333,7 @@
             button3_finalConfirmation.TabIndex = 69;
             button3_finalConfirmation.Text = "Confirm";
             button3_finalConfirmation.UseVisualStyleBackColor = true;
-            button3_finalConfirmation.Click += button3_finalConfirmation_Click;
+            //button3_finalConfirmation.Click += button3_finalConfirmation_Click;
             // 
             // cancel_rsv_button
             // 
