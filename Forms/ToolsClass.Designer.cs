@@ -87,7 +87,6 @@
             button1.Text = "Log Out";
             button1.TextImageRelation = TextImageRelation.TextAboveImage;
             button1.UseVisualStyleBackColor = false;
-            //button1.Click += button1_Click;
             // 
             // textBox1
             // 
@@ -207,6 +206,7 @@
             button2.Text = "Export Invoice to PDF";
             button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // dateTimePicker2_depart
             // 
@@ -311,7 +311,6 @@
             textBox_Discount.Name = "textBox_Discount";
             textBox_Discount.Size = new Size(96, 27);
             textBox_Discount.TabIndex = 67;
-            //textBox_Discount.TextChanged += textBox_Discount_TextChanged_1;
             // 
             // pictureBox3
             // 
@@ -333,7 +332,6 @@
             button3_finalConfirmation.TabIndex = 69;
             button3_finalConfirmation.Text = "Confirm";
             button3_finalConfirmation.UseVisualStyleBackColor = true;
-            //button3_finalConfirmation.Click += button3_finalConfirmation_Click;
             // 
             // cancel_rsv_button
             // 

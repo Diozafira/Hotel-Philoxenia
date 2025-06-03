@@ -3,6 +3,10 @@ using Hotel_Philoxenia.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Hotel_Philoxenia
@@ -14,6 +18,7 @@ namespace Hotel_Philoxenia
         public ToolsClass()
         {
             InitializeComponent();
+            QuestPDF.Settings.License = LicenseType.Community;
             _context = new HotelContext();
             LoadValidBookings();
             UpdateTotalCost();
@@ -213,5 +218,49 @@ namespace Hotel_Philoxenia
             dateTimePicker_arrival.Value = DateTime.Today;
             dateTimePicker2_depart.Value = DateTime.Today.AddDays(1);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Retrieve values from form
+            var bookingId = comboBoxBookingId.SelectedItem?.ToString() ?? "Unknown";
+            var arrival = dateTimePicker_arrival.Value.ToString("dd/MM/yyyy");
+            var depart = dateTimePicker2_depart.Value.ToString("dd/MM/yyyy");
+            var totalCost = textBox_TotalCost.Text;
+            var costPerDay = textBox_CostPerDay.Text;
+            var discount = textBox_Discount.Text;
+
+            string reservationRange = $"{arrival} - {depart}";
+            string customer = "Customer Name (optional to fetch from model)";
+            string room = "Room Info (optional to fetch from model)";
+
+            string filePath = $"Booking_{bookingId}.pdf";
+
+            Document.Create(container =>
+            {
+                container.Page(page =>
+                {
+                    page.Margin(30);
+                    page.Size(PageSizes.A4);
+
+                    page.Content().Column(col =>
+                    {
+                        col.Spacing(10);
+                        col.Item().Text("Hotel Philoxenia").FontSize(22).Bold();
+                        col.Item().Text("Reservation Invoice").FontSize(16).Underline().Bold();
+                        col.Item().Text($"Booking ID: {bookingId}");
+                        col.Item().Text($"Reservation: {reservationRange}");
+                        col.Item().Text($"Room: {room}");
+                        col.Item().Text($"Customer: {customer}");
+                        col.Item().Text($"Cost per Day: {costPerDay}");
+                        col.Item().Text($"Discount: {discount}%");
+                        col.Item().Text($"Total Cost: {totalCost}");
+                        col.Item().PaddingTop(20).Text("Thank you for choosing Hotel Philoxenia!").Italic();
+                    });
+                });
+            }).GeneratePdf(filePath);
+
+            MessageBox.Show($"PDF generated:\n{filePath}", "Success");
+        }
     }
+
 }
