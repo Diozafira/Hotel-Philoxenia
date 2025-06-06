@@ -19,6 +19,11 @@ namespace Hotel_Philoxenia.Forms
             dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
             this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
 
+            addToolStripMenuItem.Click += (s, e) => AddCustomer();
+            updateToolStripMenuItem.Click += (s, e) => UpdateCustomer();
+            deleteToolStripMenuItem.Click += (s, e) => DeleteCustomer();
+            viewToolStripMenuItem.Click += (s, e) => LoadCustomers();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -56,7 +61,7 @@ namespace Hotel_Philoxenia.Forms
 
         private void LoadCustomers()
         {
-            customerBindingSource.DataSource = _context.Customers.AsNoTracking().ToList();
+            customerBindingSource.DataSource = _context.Customers.AsNoTracking().ToList();//tells EF not to track the entities it retrieves from the database.
         }
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -91,7 +96,7 @@ namespace Hotel_Philoxenia.Forms
 
         private void UpdateCustomer()
         {
-            if (int.TryParse(textBox2.Text, out int id))
+            if (int.TryParse(textBox2.Text, out int id))//cast without error exceptions
             {
                 var customer = _context.Customers.Find(id);
                 if (customer != null)

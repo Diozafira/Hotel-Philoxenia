@@ -10,7 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Hotel_Philoxenia.Forms
 {
-    public partial class RoomClass : Form
+    public partial class RoomClass : Form //A partial class in C# allows you to split the definition of a class across multiple files. When the code is compiled, all parts are combined into one class.
     {
         private readonly HotelContext _context;
 

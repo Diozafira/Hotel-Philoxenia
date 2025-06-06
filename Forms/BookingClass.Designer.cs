@@ -66,6 +66,7 @@
             roomBindingSource4 = new BindingSource(components);
             textBox2 = new TextBox();
             button4CreateReservation = new Button();
+            button4Search = new Button();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -201,7 +202,7 @@
             label4Capacity.AutoSize = true;
             label4Capacity.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 161);
             label4Capacity.ForeColor = Color.FromArgb(0, 192, 192);
-            label4Capacity.Location = new Point(272, 158);
+            label4Capacity.Location = new Point(272, 132);
             label4Capacity.Name = "label4Capacity";
             label4Capacity.Size = new Size(93, 28);
             label4Capacity.TabIndex = 31;
@@ -240,6 +241,7 @@
             // 
             // DtReservationFrom
             // 
+            DtReservationFrom.CalendarForeColor = Color.Cyan;
             DtReservationFrom.CustomFormat = "dd/MM/yyyy";
             DtReservationFrom.Location = new Point(411, 89);
             DtReservationFrom.Margin = new Padding(3, 4, 3, 4);
@@ -261,7 +263,7 @@
             // 
             // NudPersons
             // 
-            NudPersons.Location = new Point(411, 158);
+            NudPersons.Location = new Point(411, 137);
             NudPersons.Margin = new Padding(3, 4, 3, 4);
             NudPersons.Name = "NudPersons";
             NudPersons.Size = new Size(70, 27);
@@ -411,12 +413,26 @@
             button4CreateReservation.UseVisualStyleBackColor = false;
             button4CreateReservation.Click += button4CreateReservation_Click;
             // 
+            // button4Search
+            // 
+            button4Search.BackColor = Color.FromArgb(192, 255, 255);
+            button4Search.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 161);
+            button4Search.ForeColor = SystemColors.InfoText;
+            button4Search.Location = new Point(891, 155);
+            button4Search.Name = "button4Search";
+            button4Search.Size = new Size(115, 31);
+            button4Search.TabIndex = 50;
+            button4Search.Text = "Search availability";
+            button4Search.UseVisualStyleBackColor = false;
+            //button4Search.Click += button4Search_Click;
+            // 
             // BookingClass
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1134, 707);
+            Controls.Add(button4Search);
             Controls.Add(button4CreateReservation);
             Controls.Add(textBox2);
             Controls.Add(comboBox2);
@@ -500,5 +516,6 @@
         private DataGridViewCheckBoxColumn isAvailableDataGridViewCheckBoxColumn;
         private BindingSource roomBindingSource4;
         private Button button4CreateReservation;
+        private Button button4Search;
     }
 }

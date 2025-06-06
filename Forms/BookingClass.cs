@@ -17,35 +17,7 @@ namespace Hotel_Philoxenia.Forms
             _context = new HotelContext();
         }
 
-        private void SearchRoom_Click(object sender, EventArgs e)
-        {
-            int numberOfPersons = (int)NudPersons.Value;
-            var reservationFrom = DtReservationFrom.Value.Date;
-            var reservationTo = DtReservationTo.Value.Date;
-
-            if (reservationTo <= reservationFrom)
-            {
-                MessageBox.Show("Reservation end date must be after start date.");
-                return;
-            }
-
-            var availableRooms = _context.Rooms
-                .Where(r => r.Capacity >= numberOfPersons &&
-                            !_context.Bookings.Any(b =>
-                                b.RoomId == r.Id &&
-                                b.ReservationDateFrom < reservationTo &&
-                                b.ReservationDateTo > reservationFrom &&
-                                !b.Canceled))
-                .ToList();
-
-            MessageBox.Show($"Found {availableRooms.Count} available room(s).");
-
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = availableRooms;
-
-            if (dataGridView1.Columns.Contains("Bookings"))
-                dataGridView1.Columns["Bookings"].Visible = false;
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -59,29 +31,15 @@ namespace Hotel_Philoxenia.Forms
             adminMainForm.Show();
         }
 
-        private void BringRooms()
+        private void Button4Search_Click(object sender, EventArgs e)
         {
-            int selectedCapacity = (int)NudPersons.Value;
-
-            var rooms = _context.Rooms
-                .Where(r => r.Capacity >= selectedCapacity)
-                .ToList();
-
-            dataGridView1.DataSource = rooms;
-
-            comboBox2.DataSource = rooms;
-            comboBox2.ValueMember = "Id";
-            comboBox2.DisplayMember = "RoomNumber";
-
-            var customers = _context.Customers.ToList();
-            comboBox1.DataSource = customers;
-            comboBox1.ValueMember = "Id";
-            comboBox1.DisplayMember = "FullName";
+            SearchRooms();
         }
+
 
         private void NudPersons_ValueChanged(object sender, EventArgs e)
         {
-            BringRooms();
+            SearchRooms();
         }
 
         private void button4CreateReservation_Click(object sender, EventArgs e)
@@ -230,6 +188,61 @@ namespace Hotel_Philoxenia.Forms
                 }).ToList();
 
             dataGridView1.DataSource = bookings;
+        }
+
+        private void SearchRooms()
+        {
+            {
+                int numberOfPersons = (int)NudPersons.Value;
+                var reservationFrom = DtReservationFrom.Value.Date;
+                var reservationTo = DtReservationTo.Value.Date;
+
+                // Input validation
+                if (numberOfPersons <= 0)
+                {
+                    MessageBox.Show("Please select at least one person.");
+                    return;
+                }
+
+                if (reservationTo <= reservationFrom)
+                {
+                    MessageBox.Show("Reservation end date must be after the start date.");
+                    return;
+                }
+
+                var availableRooms = _context.Rooms
+                    .Where(r => r.Capacity >= numberOfPersons &&
+                                !_context.Bookings.Any(b =>
+                                    b.RoomId == r.Id &&
+                                    b.ReservationDateFrom < reservationTo &&
+                                    b.ReservationDateTo > reservationFrom &&
+                                    !b.Canceled))
+                    .ToList();
+
+                if (availableRooms.Count == 0)
+                {
+                    MessageBox.Show("No available rooms found for the selected dates and capacity.");
+                }
+                else
+                {
+                    MessageBox.Show($"Found {availableRooms.Count} available room(s).");
+                }
+
+                dataGridView1.DataSource = availableRooms;
+
+                if (dataGridView1.Columns.Contains("Bookings"))
+                    dataGridView1.Columns["Bookings"].Visible = false;
+
+                // Update comboBoxes
+                comboBox2.DataSource = availableRooms;
+                comboBox2.DisplayMember = "RoomNumber";
+                comboBox2.ValueMember = "Id";
+
+                var customers = _context.Customers.ToList();
+                comboBox1.DataSource = customers;
+                comboBox1.DisplayMember = "FullName";
+                comboBox1.ValueMember = "Id";
+            }
         }
     }
 }
