@@ -95,7 +95,7 @@ namespace Hotel_Philoxenia.Forms
             {
                 _context.SaveChanges();
                 MessageBox.Show("Reservation created successfully.");
-                LoadBookings();
+                
             }
             catch (Exception ex)
             {
@@ -171,24 +171,7 @@ namespace Hotel_Philoxenia.Forms
             button3.Text = enable ? "Save New Customer" : "Add New Customer";
         }
 
-        private void LoadBookings()
-        {
-            var bookings = _context.Bookings
-                .Include(b => b.Customer)
-                .Include(b => b.Room)
-                .Select(b => new
-                {
-                    b.Id,
-                    Customer = b.Customer.FullName,
-                    Room = b.Room.RoomNumber,
-                    From = b.ReservationDateFrom,
-                    To = b.ReservationDateTo,
-                    b.Canceled,
-                    b.ReservationDayPrice
-                }).ToList();
-
-            dataGridView1.DataSource = bookings;
-        }
+        
 
         private void SearchRooms()
         {
