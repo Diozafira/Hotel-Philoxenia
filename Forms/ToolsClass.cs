@@ -3,11 +3,10 @@ using Hotel_Philoxenia.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
-using System.IO;
 using System.Windows.Forms;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+using QuestPDF.Helpers;
 
 namespace Hotel_Philoxenia
 {
@@ -22,6 +21,7 @@ namespace Hotel_Philoxenia
             _context = new HotelContext();
             LoadValidBookings();
             UpdateTotalCost();
+            ClearInputs();
         }
 
         private void button_Exit_Click(object sender, EventArgs e) => Application.Exit();
@@ -63,69 +63,55 @@ namespace Hotel_Philoxenia
 
             if (!double.TryParse(textBox_CostPerDay.Text, out costPerDay))
             {
-                textBox_TotalCost.Text = "Invalid input";
+                textBox_TotalCost.Text = "Invalid cost";
                 return;
             }
 
             int bookingDuration = (int)(toDate - fromDate).TotalDays;
             if (bookingDuration <= 0)
             {
-                textBox_TotalCost.Text = "Please check the dates";
+                textBox_TotalCost.Text = "Check dates";
                 return;
             }
 
-            if (TryGetDiscount(out double discountPercent))
-            {
-                double baseCost = costPerDay * bookingDuration;
-                double totalCost = ApplyDiscount(baseCost, discountPercent);
-                textBox_TotalCost.Text = totalCost.ToString("F2");
-            }
-            else
+            if (!TryGetDiscount(out double discountPercent))
             {
                 textBox_TotalCost.Text = "Invalid discount";
+                return;
             }
+
+            double baseCost = costPerDay * bookingDuration;
+            double totalCost = ApplyDiscount(baseCost, discountPercent);
+            textBox_TotalCost.Text = totalCost.ToString("F2");
         }
 
         private bool TryGetDiscount(out double discountPercent)
         {
-            if (double.TryParse(textBox_Discount.Text, out discountPercent) &&
-                discountPercent >= 0 && discountPercent <= 100)
+            discountPercent = 0;
+            string input = textBox_Discount.Text?.Trim();
+            if (string.IsNullOrEmpty(input)) return true;
+
+            if (double.TryParse(input, out double value))
             {
-                return true;
+                if (value >= 0 && value <= 100)
+                {
+                    discountPercent = value;
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Discount must be between 0 and 100%");
+                    return false;
+                }
             }
 
-            discountPercent = 0;
+            MessageBox.Show("Enter a valid discount number.");
             return false;
         }
 
         private double ApplyDiscount(double basePrice, double discountPercent)
         {
             return basePrice - (basePrice * (discountPercent / 100));
-        }
-
-        private void button_UpdateBooking_Click(object sender, EventArgs e)
-        {
-            if (comboBoxBookingId.SelectedValue is int bookingId)
-            {
-                var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
-                if (booking != null)
-                {
-                    booking.CheckInDate = dateTimePicker_arrival.Value;
-                    booking.CheckOutDate = dateTimePicker2_depart.Value;
-
-                    if (double.TryParse(textBox_CostPerDay.Text, out double costPerDay))
-                    {
-                        booking.ReservationDayPrice = costPerDay;
-                    }
-
-                    _context.SaveChanges();
-                    MessageBox.Show("Booking updated successfully.");
-                }
-                else
-                {
-                    MessageBox.Show("Booking not found.");
-                }
-            }
         }
 
         private void comboBoxBookingId_SelectedIndexChanged(object sender, EventArgs e)
@@ -135,8 +121,8 @@ namespace Hotel_Philoxenia
                 var booking = _context.Bookings.FirstOrDefault(b => b.Id == bookingId);
                 if (booking != null)
                 {
-                    dateTimePicker_arrival.Value = booking.ReservationDateFrom;
-                    dateTimePicker2_depart.Value = booking.ReservationDateTo;
+                    dateTimePicker_arrival.Value = booking.CheckInDate ?? booking.ReservationDateFrom;
+                    dateTimePicker2_depart.Value = booking.CheckOutDate ?? booking.ReservationDateTo;
                     textBox_CostPerDay.Text = booking.ReservationDayPrice.ToString("F2");
 
                     if (string.IsNullOrWhiteSpace(textBox_Discount.Text))
@@ -172,7 +158,7 @@ namespace Hotel_Philoxenia
             ClearInputs();
         }
 
-        private void button_FinalizeUpdate_Click(object sender, EventArgs e)
+        private void button3_FinalConfirmation_Click(object sender, EventArgs e)
         {
             if (comboBoxBookingId.SelectedValue is int bookingId)
             {
@@ -195,13 +181,16 @@ namespace Hotel_Philoxenia
                         TryGetDiscount(out double discountPercent))
                     {
                         int duration = (int)(depart - arrival).TotalDays;
-                        double basePrice = costPerDay * duration;
-                        booking.ReservationDayPrice = ApplyDiscount(costPerDay, discountPercent);
+                        double baseCost = costPerDay * duration;
+                        double discountedTotal = ApplyDiscount(baseCost, discountPercent);
+                        booking.ReservationDayPrice = discountedTotal / duration; // Save discounted per-day rate
                     }
+
                     UpdateTotalCost();
                     _context.SaveChanges();
                     MessageBox.Show("Booking updated successfully.");
                     LoadValidBookings();
+                    ClearInputs();
                 }
                 else
                 {
@@ -219,21 +208,42 @@ namespace Hotel_Philoxenia
             dateTimePicker2_depart.Value = DateTime.Today.AddDays(1);
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
-            // Retrieve values from form
-            var bookingId = comboBoxBookingId.SelectedItem?.ToString() ?? "Unknown";
-            var arrival = dateTimePicker_arrival.Value.ToString("dd/MM/yyyy");
-            var depart = dateTimePicker2_depart.Value.ToString("dd/MM/yyyy");
-            var totalCost = textBox_TotalCost.Text;
-            var costPerDay = textBox_CostPerDay.Text;
-            var discount = textBox_Discount.Text;
+            if (comboBoxBookingId.SelectedValue is not int bookingId)
+            {
+                MessageBox.Show("Please select a valid booking to generate invoice.");
+                return;
+            }
 
+            var booking = _context.Bookings
+                .Include(b => b.Customer)
+                .Include(b => b.Room)
+                .FirstOrDefault(b => b.Id == bookingId);
+
+            if (booking == null)
+            {
+                MessageBox.Show("Booking not found.");
+                return;
+            }
+
+            string customerName = booking.Customer?.FullName ?? "Unknown Customer";
+            string roomInfo = booking.Room != null
+                ? $"Room {booking.Room.RoomNumber} ({booking.Room.Type})"
+                : "Unknown Room";
+
+            string arrival = dateTimePicker_arrival.Value.ToString("dd/MM/yyyy");
+            string depart = dateTimePicker2_depart.Value.ToString("dd/MM/yyyy");
             string reservationRange = $"{arrival} - {depart}";
-            string customer = "Customer Name (optional to fetch from model)";
-            string room = "Room Info (optional to fetch from model)";
 
-            string filePath = $"Booking_{bookingId}.pdf";
+            string costPerDay = textBox_CostPerDay.Text;
+            string discount = string.IsNullOrWhiteSpace(textBox_Discount.Text) ? "0" : textBox_Discount.Text;
+            string totalCost = textBox_TotalCost.Text;
+            
+            
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string filePath = Path.Combine(desktopPath, $"Booking_{bookingId}.pdf");
 
             Document.Create(container =>
             {
@@ -247,20 +257,25 @@ namespace Hotel_Philoxenia
                         col.Spacing(10);
                         col.Item().Text("Hotel Philoxenia").FontSize(22).Bold();
                         col.Item().Text("Reservation Invoice").FontSize(16).Underline().Bold();
+
                         col.Item().Text($"Booking ID: {bookingId}");
-                        col.Item().Text($"Reservation: {reservationRange}");
-                        col.Item().Text($"Room: {room}");
-                        col.Item().Text($"Customer: {customer}");
-                        col.Item().Text($"Cost per Day: {costPerDay}");
+                        col.Item().Text($"Reservation Dates: {reservationRange}");
+                        col.Item().Text($"Room: {roomInfo}");
+                        col.Item().Text($"Customer: {customerName}");
+
+                        col.Item().Text($"Cost per Day: €{costPerDay}");
                         col.Item().Text($"Discount: {discount}%");
-                        col.Item().Text($"Total Cost: {totalCost}");
+                        col.Item().Text($"Total Cost: €{totalCost}");
+
                         col.Item().PaddingTop(20).Text("Thank you for choosing Hotel Philoxenia!").Italic();
                     });
                 });
             }).GeneratePdf(filePath);
 
-            MessageBox.Show($"PDF generated:\n{filePath}", "Success");
+            MessageBox.Show($"PDF successfully generated:\n{filePath}", "Success");
         }
     }
+    }
 
-}
+
+

@@ -64,9 +64,9 @@
             comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
             roomBindingSource4 = new BindingSource(components);
-            textBox2 = new TextBox();
             button4CreateReservation = new Button();
             button4Search = new Button();
+            textBox2 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)roomBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -391,14 +391,6 @@
             // 
             roomBindingSource4.DataSource = typeof(Models.Room);
             // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(411, 431);
-            textBox2.Margin = new Padding(3, 4, 3, 4);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(481, 27);
-            textBox2.TabIndex = 46;
-            // 
             // button4CreateReservation
             // 
             button4CreateReservation.BackColor = Color.LightGray;
@@ -424,7 +416,14 @@
             button4Search.TabIndex = 50;
             button4Search.Text = "Search availability";
             button4Search.UseVisualStyleBackColor = false;
-            //button4Search.Click += button4Search_Click;
+            button4Search.Click += Button4Search_Click;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(413, 434);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(481, 27);
+            textBox2.TabIndex = 51;
             // 
             // BookingClass
             // 
@@ -432,9 +431,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(1134, 707);
+            Controls.Add(textBox2);
             Controls.Add(button4Search);
             Controls.Add(button4CreateReservation);
-            Controls.Add(textBox2);
             Controls.Add(comboBox2);
             Controls.Add(comboBox1);
             Controls.Add(button3);
@@ -507,7 +506,6 @@
         private Button button3;
         private ComboBox comboBox1;
         private ComboBox comboBox2;
-        private TextBox textBox2;
         private DataGridViewTextBoxColumn Capacity;
         private DataGridViewTextBoxColumn HotelName;
         private DataGridViewTextBoxColumn roomNumberDataGridViewTextBoxColumn;
@@ -517,5 +515,6 @@
         private BindingSource roomBindingSource4;
         private Button button4CreateReservation;
         private Button button4Search;
+        private TextBox textBox2;
     }
 }

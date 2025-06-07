@@ -332,6 +332,7 @@
             button3_finalConfirmation.TabIndex = 69;
             button3_finalConfirmation.Text = "Confirm";
             button3_finalConfirmation.UseVisualStyleBackColor = true;
+            button3_finalConfirmation.Click += button3_FinalConfirmation_Click;
             // 
             // cancel_rsv_button
             // 
