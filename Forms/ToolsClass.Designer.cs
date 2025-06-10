@@ -145,7 +145,7 @@
             // 
             // hotelBindingSource
             // 
-            hotelBindingSource.DataSource = typeof(Models.Hotel);
+            //hotelBindingSource.DataSource = typeof(Models.Hotel);
             // 
             // comboBoxBookingId
             // 
@@ -384,7 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)hotelBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)bookingBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)return_image).EndInit();
-            ((System.ComponentModel.ISupportInitialize)roomsBindingSource).EndInit();
+            //((System.ComponentModel.ISupportInitialize)roomsBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();

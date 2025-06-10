@@ -4,6 +4,7 @@ using Hotel_Philoxenia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hotel_Philoxenia.Migrations
 {
     [DbContext(typeof(HotelContext))]
-    partial class HotelContextModelSnapshot : ModelSnapshot
+    [Migration("20250610143749_AvailabilityAndHotelBuildingDeleted")]
+    partial class AvailabilityAndHotelBuildingDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,6 +99,27 @@ namespace Hotel_Philoxenia.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("Hotel_Philoxenia.Models.Hotel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Hotels");
+                });
+
             modelBuilder.Entity("Hotel_Philoxenia.Models.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -105,6 +129,9 @@ namespace Hotel_Philoxenia.Migrations
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HotelId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PricePerNight")
@@ -119,6 +146,8 @@ namespace Hotel_Philoxenia.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
 
                     b.ToTable("Rooms");
                 });
@@ -163,9 +192,21 @@ namespace Hotel_Philoxenia.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("Hotel_Philoxenia.Models.Room", b =>
+                {
+                    b.HasOne("Hotel_Philoxenia.Models.Hotel", null)
+                        .WithMany("Rooms")
+                        .HasForeignKey("HotelId");
+                });
+
             modelBuilder.Entity("Hotel_Philoxenia.Models.Customer", b =>
                 {
                     b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("Hotel_Philoxenia.Models.Hotel", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("Hotel_Philoxenia.Models.Room", b =>

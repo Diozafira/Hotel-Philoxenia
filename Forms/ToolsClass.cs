@@ -183,7 +183,7 @@ namespace Hotel_Philoxenia
                         int duration = (int)(depart - arrival).TotalDays;
                         double baseCost = costPerDay * duration;
                         double discountedTotal = ApplyDiscount(baseCost, discountPercent);
-                        booking.ReservationDayPrice = discountedTotal / duration; // Save discounted per-day rate
+                        booking.ReservationDayPrice = discountedTotal / duration; 
                     }
 
                     UpdateTotalCost();
@@ -201,9 +201,9 @@ namespace Hotel_Philoxenia
 
         private void ClearInputs()
         {
-            textBox_CostPerDay.Text = "";
+            textBox_CostPerDay.Text = " ";
             textBox_Discount.Text = "0";
-            textBox_TotalCost.Text = "";
+            textBox_TotalCost.Text = " ";
             dateTimePicker_arrival.Value = DateTime.Today;
             dateTimePicker2_depart.Value = DateTime.Today.AddDays(1);
         }

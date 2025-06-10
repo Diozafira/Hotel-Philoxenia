@@ -25,7 +25,7 @@ namespace Hotel_Philoxenia.Forms
             _context = new HotelContext();
 
             LoadRooms();
-            LoadHotels();
+            //LoadHotels();
 
             RoomsClass.SelectionChanged += DataGridView1_SelectionChanged;
             //this.return_image.Click += new System.EventHandler(this.ReturnToAdminForm_Click);
@@ -76,7 +76,7 @@ namespace Hotel_Philoxenia.Forms
             int totalRooms = _context.Rooms.Count();
             totalPages = totalRooms / pageRecords;
             roomBindingSource2.DataSource = _context.Rooms
-                .Include(r => r.Hotel)
+                //.Include(r => r.Hotel)
                 .AsNoTracking()
                 .OrderBy(r => r.RoomNumber)
                 .Skip((currentPage - 1) * pageRecords)
@@ -105,18 +105,18 @@ namespace Hotel_Philoxenia.Forms
                 textBox2Capacity.Text = selected.Capacity.ToString();
                 textBox4_roomType.Text = selected.Type;
                 textBox5_priceperNight.Text = selected.PricePerNight.ToString("0.00");
-                IsAvaillable.Checked = selected.IsAvailable;
-                comboBoxHotel.SelectedValue = selected.HotelId;
+                //IsAvaillable.Checked = selected.IsAvailable;
+                //comboBoxHotel.SelectedValue = selected.HotelId;
             }
         }
 
         private void AddRoom()
         {
-            if (comboBoxHotel.SelectedValue == null)
+            /*if (comboBoxHotel.SelectedValue == null)
             {
                 MessageBox.Show("Please select a hotel before adding a room.");
                 return;
-            }
+            }*/
 
             string roomType = textBox4_roomType.Text.Trim();
             if (roomType != "Single" && roomType != "Double" && roomType != "Suite")
@@ -131,8 +131,8 @@ namespace Hotel_Philoxenia.Forms
                 Type = textBox4_roomType.Text,
                 Capacity = int.Parse(textBox2Capacity.Text),
                 PricePerNight = decimal.Parse(textBox5_priceperNight.Text),
-                IsAvailable = IsAvaillable.Checked,
-                HotelId = (int)comboBoxHotel.SelectedValue
+               //IsAvailable = IsAvaillable.Checked,
+               //HotelId = (int)comboBoxHotel.SelectedValue
             };
 
             _context.Rooms.Add(newRoom);
@@ -152,8 +152,8 @@ namespace Hotel_Philoxenia.Forms
                     room.Type = textBox4_roomType.Text;
                     room.Capacity = int.Parse(textBox2Capacity.Text);
                     room.PricePerNight = decimal.Parse(textBox5_priceperNight.Text);
-                    room.HotelId = (int)comboBoxHotel.SelectedValue;
-                    room.IsAvailable = IsAvaillable.Checked;
+                    //room.HotelId = (int)comboBoxHotel.SelectedValue;
+                    //room.IsAvailable = IsAvaillable.Checked;
 
 
 
@@ -191,17 +191,17 @@ namespace Hotel_Philoxenia.Forms
             textBox4_roomType.Text = "";
             textBox5_priceperNight.Text = "";
             textBox2Capacity.Text = "";
-            IsAvaillable.Checked = true;
-            comboBoxHotel.SelectedIndex = -1;
+            //IsAvaillable.Checked = true;
+            //comboBoxHotel.SelectedIndex = -1;
         }
 
-        private void LoadHotels()
+        /*private void LoadHotels()
         {
             var hotels = _context.Hotels.ToList();
             comboBoxHotel.DataSource = hotels;
             comboBoxHotel.DisplayMember = "Name";
             comboBoxHotel.ValueMember = "Id";
-        }
+        }*/
 
         private void GoToPreviousPage()
         {
